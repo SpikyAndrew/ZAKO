@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<!--
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+-->
+<html>
+    <head>
+        <title>Procsim - web processor architecture simulator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/main.css"/>
+        <link rel="stylesheet" href="js/jquery-ui-1.11.4/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="js/linedtextarea/jquery-linedtextarea.css"/>
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+
+        <!--<script type="text/javascript" src="js/libs/jquery.js"></script> -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <!--<script type="text/javascript" src="js/libs/knockout.js"></script> -->
+         <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script> 
+         <script type="text/javascript" src="js/libs/knockout-sortable.js"></script>
+
+        <script type="text/javascript" src="js/libs/Blob.js"></script>
+        <script type="text/javascript" src="js/libs/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/additionalHandlers.js"></script>
+
+        <script type="text/javascript" src="js/linedtextarea/jquery-linedtextarea.js"></script>
+
+        <script type="text/javascript" src="js/observer.js"></script>
+        <script type="text/javascript" src="js/register_list.js"></script>
+        <script type='text/javascript' src='js/memory_matrix.js'></script>
+        <script type='text/javascript' src='js/AsmInterpreterMicrocode.js'></script>
+
+        <script type="text/javascript" src="js/jump_table.js"></script>
+        <script type="text/javascript" src="js/microcode.js"></script>
+
+        <script type="text/javascript" src="js/libs/svgDraw.js"></script>
+        <script type="text/javascript" src="js/arch_diagram.js"></script>
+
+
+    </head>
+    <body class="material">
+        <div class="body flex-cols-box">
+            <div class="action-bar">
+				<div class="action-buttons-left">
+                    <a href="#" class="button" id='aboutButton'  data-toggle="modal" data-target="#help-dialog">Help</a>
+				</div>
+                Procsim - web processor simulator
+                <div class="action-buttons">
+                    <a href="#" class="button" id='saveButton'>Zapisz</a>
+                    <a href="#" class="button" data-bind="click: saveToFile">Zapisz projekt</a>
+                    <a href="#" class="button" data-bind="click: function(){$('#loadFromFileInput').click();}">Wczytaj projekt</a>
+                    <form id="fileFieldForm">
+                        <input type="file" id="loadFromFileInput" style="display: none;" data-bind="event: {change: function(data,event){handleFileSelect(data,event,$('#fileFieldForm'));}}" />
+                    </form>
+                </div>
+            </div>
+            <div id="content" class="flex-row flex-rows-box" >  
+                <div id="asm-code-bar" class="flex-col content-box">
+                    <div class="title-bar-flex">
+                        Kod assemblera
+                    </div>
+                    <textarea id="asm-code-ta" spellcheck="false" style="">mov R1,0 ; start
+start: memstore R1,R1
+inc R1;
+sub R1,10,R2;
+jlt R2, start
+mov R1,20;</textarea>
+
+                </div>
+                <div id="right-column" class="flex-col">
+                    <div class="flex-2-item" style="position: relative;">
+                        <div class="title-bar-flex">Architektura rdzenia</div>
+                        <div id="core-block" class="test row box" style="margin: 0px;">
+                            <div class="col-sm-12 col-md-12 col-lg-12" id="architectureBox">
+                                <div class="title-bar-flex-second">
+                                    Rdzeń MIPS
+                                </div>
+                                <div class="content-box box-padding text-center box" id="architectureDiagram">
+                                    <canvas id="archConnections"></canvas>
+                                    <div id="outline">
+                                        <div id="alu">
+                                            <img src="img/alu.svg" alt="ALU"/>
+                                            <span data-bind="text: interpreter.currentMcRow()?interpreter.currentMcRow().ALU:''" id="ALU-command"></span>
+                                        </div>
+
+
+                                        <div id="arch-regA">A: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.A())"></span></div>
+                                        <div id="arch-regB">B: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.B())"></span></div>
+                                        <div id="arch-regC">C: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.C())"></span></div>
+                                        <div id="registersWrapper">
+
+                                            <div id="registers">
+                                                <ol class='monospace' start="0" id="register-List" data-bind="foreach: registerList.registers">
+                                                    <li><span data-bind="text: 'R'+$index()+': '"></span><span data-bind="text: convertToHexWithLeading($data)"></span></li>
+                                                </ol>
+                                                <ul class="monospace register-list" data-bind="foreach: architectureRegisters.additionalRegisters" id="architectureRegisters">
+                                                    <li><span data-bind="text: $data.name" class="register-name"></span>: <span data-bind="text: convertToHexWithLeading($data.register())"></span></li>
+                                                </ul>
+                                                <ul class="monospace register-list">
+                                                    <li id="PC-register"><span class="register-name">PC</span>: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.PC())"></span></li>
+                                                    <li id="MAR-register"><span class="register-name">MAR</span>: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.MAR())"></span></li>
+                                                    <li id="MDR-register"><span class="register-name">MDR</span>: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.MDR())"></span></li>
+                                                    <li id="IR-register"><span class="register-name">IR</span>: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.IR())"></span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div id="memory-block">
+                                            Memory
+                                        </div>
+                                        <div id="microcode-block">
+                                            Microcode
+                                        </div>
+
+                                        <div id="jumptable-block">
+                                            Jump table
+                                        </div>
+                                        <div id="uArIncrementer">
+                                            +1
+                                        </div>
+                                        <div id="uAR-register"><span>&micro;AR: </span><span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.uAR())"></span></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="clearfix"></div>-->
+                            <!--                            <div class="col-sm-6 col-md-6 col-lg-3" id="nav-div">
+                                                            <div class="title-bar-flex-second">Nawigacja</div>
+                                                            <div class="content-box box-padding text-center box">
+                                                                <button class='circle-button' id='resetButton'><i class="fa fa-refresh"></i></button>
+                                                                <button class='circle-button' id='nextInstrButton'><i class="fa fa-step-forward"></i></button>
+                                                            </div>
+                                                        </div>-->
+                            <!--                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            <div class="title-bar-flex-second">Rejestry</div>
+                                                            <div class="content-box box-padding">
+                                                                <ol id='registerList' class='monospace' start="0" data-bind="foreach: registerList.registers">
+                                                                    <li data-bind="text: convertToHexWithLeading($data)"></li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>-->
+                            <!--                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <div class="title-bar-flex-second">Rejestry architektury</div>
+                                                            <div class="content-box box-padding">
+                                                                <table class='monospace' style='width: 100%;'>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style="text-align: right; padding-right: 5px;">Rejestr</th>
+                                                                            <th>Wartość</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody data-bind="foreachprop:  architectureRegisters.registers">
+                                                                        <tr>
+                                                                            <th data-bind="text: key+':'" style='text-align: right; padding-right: 5px;'></th>
+                                                                            <td data-bind="text: convertToHexWithLeading(value())"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>-->
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="flex-1-item" id="bottom-pane">
+                        <div class="tab-content">
+                            <div id="tab-memory" class="tab-pane fade in active">
+                                <table id='memory-table'></table>
+                            </div>
+                            <div id="tab-jumptable" class="tab-pane fade">
+
+                                <div id="jumptable-contents">
+                                    <table id="jumpTable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Mnemonik rozkazu
+                                                </th>
+                                                <th>
+                                                    Etykieta mikrokodu
+                                                </th>
+                                                <th>Usuń</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: jumpTable.jumpTable">
+                                            <tr>
+                                                <td><input type="text" data-bind="value: mnemonic" /></td>
+                                                <td><input type="text" data-bind="value: uCodeLabel" /></td>
+                                                <td>
+                                                    <i class="fa fa-remove remove-button" data-bind="click: function(data){remove(data,$parent.jumpTable.jumpTable);}"  title="Usuń"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="button" class="button-rised add-button" value="Dodaj wiersz" data-bind="click: jtAddRow"/>
+                                </div>
+                            </div>
+                            <div id="tab-microcode" class="tab-pane fade">
+                                <!--<div class="title-bar-flex-second">Nawigacja</div>-->
+
+                                <table style="width: 100%;" id="microcode-table">
+                                    <thead>
+                                        <tr>
+                                            <th>&micro;Addr</th>
+                                            <th>Label</th>
+                                            <th>ALU</th>
+                                            <th>S1</th>
+                                            <th>S2</th>
+                                            <th>Dest</th>
+                                            <th>ExtIr</th>
+                                            <th>Const</th>
+                                            <th>JCond</th>
+                                            <th>Adr</th>
+                                            <th>Mem</th>
+                                            <th>MAdr</th>
+                                            <th>MDest</th>
+                                            <th>Regs</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="sortable: {data: microcode.microcodeObsArr, options: { handle: 'th i',cursor: 'move',axis:'y' } }">
+                                        <tr data-bind="css: { executing: $root.execUCodeLine()===$index() }">
+                                            
+                                            <!--<th><i class="fa fa-reorder"></i><span data-bind="text: $index"></span></th>-->
+                                            <th><i class="fa fa-reorder"></i><span></span></th>
+                                            <td><input type="text" data-bind="value: label"  style="width: 70px;"/></td>
+                                            <td>
+                                                <select data-bind="options: Object.keys($root.microcodeOpts.aluOperations),optionsCaption: '', value: ALU"></select>
+                                            </td>
+                                            <td><select data-bind="options: $root.microcodeOpts.s1opts, value: S1,optionsCaption: ''"></select></td>
+                                            <td><select data-bind="options: $root.microcodeOpts.s2opts, value: S2,optionsCaption: ''"></select></td>
+                                            <td><select data-bind="options: $root.microcodeOpts.destOpts, value: Dest,optionsCaption: ''"></select></td>
+                                            <td><select data-bind="options: $root.microcodeOpts.extIrOpts, value: ExtIR,optionsCaption: ''"></select></td>
+                                            <td><input type="number" data-bind="value: Const" style="width: 50px;"/></td>
+                                            <td>
+                                                <select data-bind="options: Object.keys($root.microcodeOpts.JCond), value: JCond,optionsCaption: ''"></select>
+                                            <td><input type="text" data-bind="value: Adr" style="width: 70px;"/></td>
+                                            <td><select data-bind="options: Object.keys($root.microcodeOpts.memOpts), value: Mem,optionsCaption: ''"></select></td>
+                                            <td><select data-bind="options: $root.microcodeOpts.mAdrOpts, value: MAdr,optionsCaption: ''"></select></td>
+                                            <td><select data-bind="options: $root.microcodeOpts.mDestOpts, value: MDest,optionsCaption: ''"></select></td>
+                                            <td><select data-bind="options: Object.keys($root.microcodeOpts.regsOpts), value: Regs,optionsCaption: ''"></select></td>
+                                            <td><i class="fa fa-remove remove-button" data-bind="click: $root.microcode.removeRow" title="Usuń"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="text-center">
+                                    <input type="button" class="button-rised add-button" value="Dodaj wiersz" data-bind="click: $root.mcAddRow"/>
+                                </div>
+
+                            </div>
+                            <div id="tab-log" class="tab-pane fade">
+                                <h3>Log</h3>
+                                <p id="log-content"></p>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <ul class="nav nav-pills">
+                                <li class="active"><a data-toggle="pill" href="#tab-memory">Pamięć</a></li>
+                                <li><a data-toggle="pill" href="#tab-microcode" onclick="setTimeout(function () {
+											$('#microcode-table').scrollableTableFixedHeader();
+										}, 500);">Mikrokod</a></li>
+                                <li><a data-toggle="pill" href="#tab-jumptable">Jump table</a></li>
+                                <li><a data-toggle="pill" href="#tab-log">Info log</a></li>
+                            </ul>
+                            <div class="action-buttons">
+								<span id="all-cycles" data-bind="text: allCycles"> </span>
+								<input type="number" value="0" id="multiple-cycles" data-bind="value: multipleCycles"/>
+                                <button class='circle-button-small' id='resetButton'><i class="fa fa-refresh"></i></button>
+                                <button class='circle-button-small' id='nextInstrButton'><i class="fa fa-step-forward"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div id="help-dialog" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header action-bar" style="width: 100%;">
+
+						<div class="action-buttons">
+							<button type="button" class="button" data-dismiss="modal">Zamknij</button>
+						</div>
+						<h4 class="modal-title">Help</h4>
+					</div>
+					<div class="modal-body">
+						<h3>Parser asemblera:</h3>
+						<p>
+							Każdy rozkaz jest parsowany i kodowany do 4 bajtów.<br />
+							Pierwszy bajt to indeks rozkazu z tablicy funkcjonalności rdzenia.<br />
+							Każde kolejne 4 bity to numer kolejno przekazywanego rejestru.<br />
+							Jeśli podano wartość natychmiastową, jest ona umieszczana na maksymalnej liczbie pozostałych bajtów - jeśli podano 1 lub 2 rejestry formalne - na dwóch bajtach. Jeśli nie podano żadnego - na 3 bajtach.<br />
+						</p>
+						<h4>Przykład kodu asm:</h4>
+						<p>
+							<code><span class="asm-mnemonic">add</span> R0,R0,R1<span class="asm-comment"> ;to jest komentarz</span><br />
+								<span class="asm-label">start: </span><span class="asm-mnemonic">addi</span> R1,1,R <span class="asm-comment">;Utwórz label start</span><br />
+								<span class="asm-mnemonic">subi</span> R1,10,R2<br />
+								<span class="asm-mnemonic">jlt</span> R2, <span class="asm-label">start</span><span class="asm-comment"> ;skocz do start gdy R2<0</span><br />
+								<span class="asm-label">finish:</span> <span class="asm-mnemonic">jmp</span> <span class="asm-label">finish</span><span class="asm-comment"> ;skocz bezwarunkowo</span><br />
+							</code>
+						</p>
+
+						<h3>Tips &amp; tricks</h3>
+						<p>
+							Przycisk "Zapisz" zapisuje projekt do lokalnej pamięci przeglądarki (localstorage)<br />
+							Przyciski "Wczytaj projekt" i "Zapisz projekt" pozwalają na wczytanie i wyeksportowanie projektu do pliku w formacie json.<br />
+							Aby wykonać wiele cykli jednocześnie, wpisz liczbę cykli w pole tekstowe obok przycisku reset.
+
+						</p>
+						<h3>Autor</h3>
+						<p>
+							Autor: J.Demk<br />
+							email: demjot@eti.pg.gda.pl<br />
+						</p>
+						<h3>Licencja</h3>
+						<p>
+							Aplikacja dostępna za zgoda Autora<br/>
+							Repozytorium: <a href="eti">eti.pg.gda.pl</a>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>	
+        <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/ProcsimVM.js"></script>
+        <script type="text/javascript">
+
+									defaultMicrocodeSize = 20;
+
+									$(function () {
+
+										var asmCodeLinedTextarea = $('#asm-code-ta').linedtextarea({
+											selectedLine: 1
+										});
+
+										asmCodeLinedTextarea.setCurrentLine(1);
+
+										var asmLineUpdater = function (pcAddress) {
+											asmCodeLinedTextarea.setCurrentLine(Math.floor(pcAddress / 4));
+										};
+
+
+										$textarea = $('textarea#asm-code-ta');
+										viewModel = new ProcsimVM(asmLineUpdater, function () {}, $textarea);
+
+
+										if (localStorage.asmCode !== undefined) {
+											$textarea.val(localStorage.asmCode);
+										}
+
+
+
+
+										currentInstructions = [];
+										$('#resetButton').click(function () {
+											viewModel.interpreter.resetRegisters();
+											currentInstructions = $textarea.val().split("\n");
+                                viewModel.interpreter.setInstructionsToExec(currentInstructions);
+                                asmCodeLinedTextarea.setCurrentLine(1);
+                                viewModel.interpreter.beginCodeExecution();
+                                connectAll(viewModel.interpreter.currentMcRow());
+								viewModel.allCycles(0);
+                            });
+                            $('#nextInstrButton').click(function () {
+								for (var i = 0; i < viewModel.multipleCycles(); i++) {
+									try {
+										viewModel.interpreter.interpretCurrentMicroinstruction();
+									} catch (e) {
+										var $el = $('<li></li>');
+										$el.text(e.message);
+										$('#log-content').append($el);
+									}
+								}
+								viewModel.allCycles(parseInt(viewModel.allCycles())+parseInt(viewModel.multipleCycles()));
+								connectAll(viewModel.interpreter.currentMcRow());
+							});
+
+
+                            $('#saveButton').click(function(e){
+                                localStorage.ramMem = JSON.stringify(viewModel.memoryMx.export());
+                                localStorage.asmCode = $textarea.val();
+                                viewModel.save();
+                                e.preventDefault();
+                                return false;
+                            });
+                            ko.applyBindings(viewModel);
+                            connectAll(viewModel.interpreter.currentMcRow());
+                            $('#resetButton').click();
+
+
+                            $('#microcode-table').scrollableTableFixedHeader();
+                            
+                        });
+//                        window.onbeforeunload = function()
+//                        {
+//                            localStorage.ramMem = JSON.stringify(viewModel.memoryMx.export());
+//                            localStorage.asmCode = $textarea.val();
+//                            viewModel.save();
+//                            return "Przed zamknięciem aplikacji upewnij się, że wszystkie potrzebne dane zostały zapisane!";
+//                        };
+        </script>
+    </body>
+</html>

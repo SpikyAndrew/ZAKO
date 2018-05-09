@@ -1,0 +1,118 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-04-05, 01:42:34
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:22:26
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+#architectureBox {
+  height: 100%;
+  padding-bottom: 30px;
+  position: relative; }
+  #architectureBox #architectureDiagram {
+    position: relative;
+    height: 100%; }
+    #architectureBox #architectureDiagram #alu {
+      position: absolute;
+      left: 320px;
+      top: 0px;
+      width: 50px;
+      height: 100px; }
+      #architectureBox #architectureDiagram #alu img {
+        width: 50px;
+        height: 100px; }
+    #architectureBox #architectureDiagram #microcode-block {
+      position: absolute;
+      left: 50px;
+      top: 120px;
+      width: 80px;
+      height: 80px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 80px; }
+    #architectureBox #architectureDiagram #uArIncrementer {
+      position: absolute;
+      left: 50px;
+      top: 10px;
+      width: 50px;
+      height: 50px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 50px; }
+    #architectureBox #architectureDiagram #uAR-register {
+      position: absolute;
+      left: 50px;
+      top: 70px;
+      background: #4CAF50;
+      text-align: center;
+      padding: 5px; }
+    #architectureBox #architectureDiagram #memory-block {
+      position: absolute;
+      left: 50px;
+      top: 320px;
+      width: 80px;
+      height: 80px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 80px; }
+    #architectureBox #architectureDiagram #jumptable-block {
+      position: absolute;
+      left: 50px;
+      top: 220px;
+      width: 80px;
+      height: 80px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 80px; }
+    #architectureBox #architectureDiagram #arch-regA, #architectureBox #architectureDiagram #arch-regB, #architectureBox #architectureDiagram #arch-regC {
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      background: #4CAF50; }
+    #architectureBox #architectureDiagram #arch-regA, #architectureBox #architectureDiagram #arch-regB {
+      left: 320px; }
+    #architectureBox #architectureDiagram #arch-regA {
+      top: 120px; }
+    #architectureBox #architectureDiagram #arch-regB {
+      top: 160px; }
+    #architectureBox #architectureDiagram #arch-regC {
+      right: 40px;
+      top: 140px; }
+    #architectureBox #architectureDiagram #registersWrapper {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding-left: 320px;
+      width: 100%; }
+      #architectureBox #architectureDiagram #registersWrapper #registers {
+        position: absolute;
+        top: 70px;
+        left: 50%;
+        /*margin-left: -$registersWidth/2;*/ }
+        #architectureBox #architectureDiagram #registersWrapper #registers ol {
+          background-color: #E8F5E9;
+          margin-bottom: 0px;
+          padding: 5px 10px; }
+        #architectureBox #architectureDiagram #registersWrapper #registers ul#architectureRegisters {
+          margin-top: 10px; }
+        #architectureBox #architectureDiagram #registersWrapper #registers ul.register-list {
+          padding: 0px; }
+          #architectureBox #architectureDiagram #registersWrapper #registers ul.register-list li {
+            height: 30px;
+            line-height: 30px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            background-color: #E8F5E9; }
+    #architectureBox #architectureDiagram canvas#archConnections {
+      z-index: -10; }
+
+/*# sourceMappingURL=architecture_diagram.css.map */

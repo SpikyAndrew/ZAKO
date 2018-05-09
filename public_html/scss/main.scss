@@ -1,0 +1,576 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 19:01:02
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+
+
+
+
+@import "_reset.scss";
+@import "flex.scss";
+@import "bootstrap_styles_material.scss";
+@import "skin.scss";
+
+
+body {
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    font-family: "RobotoDraft","Roboto",sans-serif;
+}
+
+.box-shadow {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
+
+.test {
+    border: 1px dotted #dedede;
+
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    right: 0px;
+    bottom: 0px;
+
+}
+
+.content-box {
+    @extend .box-shadow;
+    z-index: 5;
+    background: $dark-bg-color;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"], button, .button {
+    background: $button-background-color;
+    color: $button-font-color;
+    border: 0px;
+    font-weight: bold;
+    box-shadow: $button-shadow;
+    border-radius: 10px; //25%;
+    padding-left: $button-height - $button-font-size/2;
+    padding-right: $button-height - $button-font-size/2;
+    font-size: $button-font-size;
+    height: $button-height;
+    line-height: $button-height+3;
+    outline: 0 !important;
+    transition: all 200ms ease;
+    &:hover {
+        /*        background: $button-hover-background-color;
+                color: $button-hover-font-color;*/
+        transform: scale(1.1) ;//rotate(-5deg);
+        box-shadow: $button-hover-shadow;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input,a,button {
+    &.button-rised {
+        background: $primary-color;
+        border: none;
+        border-radius: 0px;
+        text-align: center;
+        box-shadow: $rised-button-shadow;
+        &:hover {
+            box-shadow: $rised-button-shadow-hover;
+            transform: scale(1.02);
+        }
+    }
+}
+
+
+.circle-button {
+    background: $button-background-color;
+    color: $button-font-color;
+    border: 0px;
+    font-weight: bold;
+    box-shadow: $button-shadow;
+    border-radius: 100%;
+    padding: 0px;
+    text-indent: 0px;
+    font-size: $button-font-size;
+    height: $circle-button-height;
+    width: $circle-button-height;
+    text-align: center;
+    line-height: $circle-button-height+3;
+    margin-left: $circle-button-height/8;
+    margin-right: $circle-button-height/8;
+}
+
+.circle-button-small {
+    @extend .circle-button;
+
+    font-size: (2*$button-font-size/3);
+    height: $circle-button-small-height;
+    width: $circle-button-small-height;
+    line-height: $circle-button-small-height+3;
+    margin-left: $circle-button-small-height/8;
+    margin-right: $circle-button-small-height/8;
+}
+
+
+#asm-code-bar {
+    overflow: auto;
+    width: $asm-bar-width;
+    flex: 0 0 $asm-bar-width;
+    display: flex;
+    flex-flow: column;
+
+    textarea#asm-code-ta {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        display: block;
+        margin: 0px;
+        resize: none;
+        background: $dark-bg-color;
+        border: none;
+
+    }
+}
+
+#right-column {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+    background: $bg-color;
+    margin-left: $content-margin;
+
+    @extend .content-box;
+
+    #core-block {
+        display: block;
+    }
+
+
+    #nav-div {
+        margin-bottom: 20px;
+        .content-box {
+            position: relative;
+        }
+    }
+
+
+    #ALU-command {
+        position: relative;
+        top: -20px;
+        left: 25px;
+    }
+
+}
+
+
+
+@mixin actionButton() {
+	margin-left: $action-bar-padding;
+	height: $action-bar-height - 2*$action-bar-padding;
+	border-radius: $action-button-border-radius;
+	/*line-height: $action-bar-height - 2*$action-bar-padding;*/
+	line-height: $button-height+1.5;
+	display: block;
+	text-align: center;
+	padding-left: $action-button-padding;
+	padding-right: $action-button-padding;
+	color: $action-bar-text-color;
+}
+
+.action-bar {
+    @extend .box-shadow;
+    width: 100vw;
+    height: $action-bar-height + $action-bar-border-height;
+
+    background: $primary-color;
+    color: $action-bar-text-color;
+    font-size: 1.8em;
+    line-height: $action-bar-height;
+    text-align: center;
+    z-index: $action-bar-zindex;
+    position: relative;
+
+    border-top: $action-bar-border-height solid $primary-color-darker;
+	.action-buttons-left {
+		position: absolute;
+		left: 0px;
+		top: $action-bar-padding;
+
+		.button {
+			float: left;
+			@include actionButton();
+			/*margin-left: 5px;*/
+		}
+		a.button {
+			text-decoration: none;
+		}
+	}
+    .action-buttons {
+        position: absolute;
+        right: $action-bar-padding;
+        top: $action-bar-padding;
+
+
+
+
+        .button {
+            float: right;
+			@include actionButton();
+        }
+        a.button {
+            text-decoration: none;
+        }
+    }
+
+
+}
+
+.title-bar-flex {
+    @extend .box-shadow;
+    height: $title-bar-height;
+    text-align: center;
+    line-height: $title-bar-height;
+    color: $title-bar-font-color;
+    z-index: $title-bar-zindex;
+    background-color: $secondary-color;
+}
+
+.title-bar-flex-second {
+    @extend .title-bar-flex;
+    background-color: $primary-color;
+    position: relative;
+}
+
+#content {
+    background-color: #ffffff;
+    padding: $content-margin;
+}
+
+.body {
+    height: 100vh;
+}
+
+#bottom-pane {
+    /*background: #dedede;*/
+    flex-flow: column;
+    display: flex;
+    position: relative;
+
+    .tab-pane {
+        padding: 10px;
+    }
+
+    .bottom {
+        @extend .box-shadow;
+        width: 100%;
+        height: 40px;
+        background: $primary-color;
+        position: absolute;
+        bottom: 0px;
+    }
+
+
+    table thead th {
+        text-align: center;
+    }
+
+    input[type=text],
+    input[type=number] {
+        line-height: 100%;
+        border: none;
+        border-bottom: 2px solid $primary-color;
+        background: transparent;
+        height: 22px;
+        padding: 0px;
+        &:focus {
+            outline: none;
+            border-bottom-color: $accent-color !important;
+        }
+
+        &:hover {
+            border-bottom-color: $primary-color-darker;
+        }
+    }
+
+
+    #tab-microcode {
+        table {
+            margin-top: 15px;
+            thead {
+                position: fixed;
+                z-index: 200;
+                display: block;
+                /*top: 0px;*/
+                /*left: 0px;*/
+                margin-top: -25px;
+                background: #ffffff;
+                th {
+                    background: #ffffff;
+                }
+            }
+
+            tbody 
+            {
+
+                td {
+                    text-align: center;
+                    /*border-bottom: 1px solid $secondary-color;*/
+
+                    select {
+                        appearance:none;
+                        -moz-appearance:none; /* Firefox */
+                        -webkit-appearance:none; /* Safari and Chrome */
+
+                        height: 20px;
+
+                        border: 0px;
+                        border-bottom: 2px solid $primary-color;
+                        padding-left: 5px;
+                        padding-right: 18px;
+                        background: transparent;
+
+                        &:focus {
+                            outline: none;
+                            border-bottom-color: $accent-color;
+                        }
+
+                        background: url("../img/br_down_8.png") no-repeat right 5px center;
+
+                    }
+
+
+                    .remove-button {
+                        position: relative;
+                        top: 3px;
+                    }
+
+
+                }
+                tr {
+
+                    /*border-top: transparent 5px solid;*/
+                    td input {
+                        position: relative;
+                        top: -2px;
+                    }
+
+                    &.executing {
+                        td,th{
+                            background: $table-selected-bg-color;
+                        }
+                    }
+                }
+                th {
+                    text-align: right;
+                    padding-right: 5px;
+                    i.fa {
+                        cursor: move;
+                        float: left;
+                        margin-left: 5px;
+                        color: $secondary-color;
+                        top: 3px;
+                        position: relative;
+                    }
+
+                    span {
+                        position: relative;
+                        top: 2px;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .add-button {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .remove-button {
+        color: $remove-color;
+        cursor: pointer;
+    }
+
+    #tab-jumptable {
+
+        table#jumpTable {
+            width: 420px;
+            text-align: center;
+            margin: 0 auto;
+
+            .remove-button {
+                color: $remove-color;
+                cursor: pointer;
+                line-height: 20px;
+
+                position: relative;
+                top: 3px;
+            }
+
+        }
+
+        .add-button {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #jumptable-contents {
+            text-align: center;
+            position: relative;
+        }
+
+    }
+
+}
+
+.monospace {
+    font-family: monospace;
+}
+
+.tab-content {
+
+    overflow: auto;
+    flex: 1;
+    position: absolute;
+    min-height: 0px;
+    top: 0px;
+    bottom: 40px;
+    left: 0px;
+    right: 0px;
+    z-index: 5000;
+}
+
+
+#bottom-pane #tab-memory {
+    width: 100%;
+
+    table {
+        width: 100%;
+        text-align: center;
+        min-height: 0;
+
+
+        tr {
+            webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        td:hover {
+            background: $table-selected-bg-color;
+        }
+
+
+        td,th {
+            text-align: center;
+            padding-left: 2.5px;
+            padding-right: 2.5px;
+
+            font-family: monospace;
+
+            input {
+                width: 85px;
+                text-align: center;
+                height: 17px;
+                margin: -2px;
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+
+            &.selected {
+                background: $table-selected-bg-color;
+            }
+        }
+    }
+
+}
+
+ol, ul {
+    &#registerList {
+        list-style: decimal-leading-zero;
+        padding-left: 40px;
+        padding-top: 5px;
+        text-align: center;
+    }
+}
+
+
+ol#register-List { 
+    padding: 5px 10px;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+
+div.box {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.box-padding {
+    padding: 5px;
+}
+
+@import "architecture_diagram.scss";
+
+
+.bottom {
+
+    .nav.nav-pills { 
+        float: left;
+    }
+    .action-buttons {
+        float: right;
+        padding: 5px 5px;
+        .button {
+            float: right;
+            margin-left: $action-bar-padding;
+            height: $action-bar-height - 2*$action-bar-padding;
+            border-radius: $action-button-border-radius;
+            /*line-height: $action-bar-height - 2*$action-bar-padding;*/
+            line-height: $button-height+1.5;
+            display: block;
+            text-align: center;
+            padding-left: $action-button-padding;
+            padding-right: $action-button-padding;
+            color: $action-bar-text-color;
+        }
+        a.button {
+            text-decoration: none;
+        }
+
+        .circle-button-small {
+
+        }
+
+
+    }
+}
+
+#help-dialog {
+
+	code {
+		background: transparent;
+		color: #000;
+		padding: 0px;
+
+		.asm-comment {
+			color: $primary-color;
+		}
+		.asm-mnemonic {
+			color: #2F91E7;
+
+		}
+		.asm-label {
+			color: #194D7A;
+		}
+	}
+
+}

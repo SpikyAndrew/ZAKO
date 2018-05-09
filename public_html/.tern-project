@@ -1,0 +1,20 @@
+{
+		"libs": [
+				"browser",
+				"jquery"
+		],
+		"loadEagerly": [
+		"C:\Users\Adam\Desktop\public_html/js/jquery.js",
+		"C:\Users\Adam\Desktop\public_html/js/knockout.js",
+		"C:\Users\Adam\Desktop\public_html/js/knockout-3.2.0.debug.js",
+		"C:\Users\Adam\Desktop\public_html/js/jquery-ui.min.js",
+		"C:\Users\Adam\Desktop\public_html/js/bootstrap.min.js",
+		"C:\Users\Adam\Desktop\public_html/js/*.js"
+		],
+		"plugins": {
+				"requirejs": {
+						"baseURL": "./",
+						"paths": {}
+				}
+		}
+}

@@ -1,0 +1,44 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:22:26
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+
+$primary-color: #8BC34A; 
+$primary-color-darker: #689F38; 
+$secondary-color: #BDBDBD; //#90A4AE;
+$accent-color: #FFEA00;
+$dark-accent-color: #78909C;
+
+$dark-bg-color: #FAFAFA; //#F1F8E9; //#ECEFF1;
+$bg-color: #ffffff;
+
+$action-bar-text-color: #ffffff;
+$action-bar-height: 50px;
+$action-bar-border-height: 5px;
+$action-bar-zindex: 20;
+$action-bar-padding: 10px;
+
+$action-button-border-radius: 5px;
+$action-button-padding: 10px;
+
+$primary-font-color: #ffffff;
+
+$title-bar-height: 30px;
+$title-bar-font-color: #ffffff;
+$title-bar-zindex: 19;
+
+
+$content-margin: 20px;
+
+$asm-bar-width: 350px;
+
+$button-height: 30px;
+$button-font-size: 18px;
+$button-background-color: $primary-color-darker;
+$button-font-color: $primary-font-color;
+
+$button-hover-background-color: $primary-color;
+$button-hover-font-color: $primary-font-color;

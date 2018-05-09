@@ -1,0 +1,113 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:13:49
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+
+@import "_reset.scss";
+@import "skin.scss";
+
+
+
+body.material {
+
+    .nav-pills {
+        li a[data-toggle="pill"] {
+            background: none;
+            color: $primary-font-color;
+        }
+
+        li.active {
+            background: $primary-color-darker;
+        }
+    }
+
+
+    .btn-group.bootstrap-select {
+        &.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+
+        }
+
+
+        .btn.dropdown-toggle.btn-default {
+
+            position: relative;
+            top: -2px;
+
+            border: none;
+            border-bottom: 2px solid $primary-color;
+            border-radius: 0px;
+            line-height: 100%;
+            background: transparent;
+            height: 24px;
+            padding: 0px;
+            margin-bottom: -2px;
+            box-shadow: none;
+
+
+            &:focus {
+                outline: none;
+                border-bottom-color: $accent-color !important;
+            }
+
+            &:hover {
+                border-bottom-color: $primary-color-darker;
+                transform: none;
+                box-shadow: none;
+            }
+
+            span.filter-option {
+                position: relative;
+                top: 2px;
+            }
+
+
+        }
+
+        .dropdown-menu>li>a {
+            padding-left: 10px;
+            padding-right: 10px;
+
+        }
+
+        div.dropdown-menu {
+
+            box-shadow: $button-shadow;
+            border-radius: $action-button-border-radius;
+            padding: 0px;
+            /*background: $table-selected-bg-color;*/
+            /*border-radius: 0px;*/
+            border: 0px;
+
+            ul li {
+
+                a:focus {
+                    outline: none !important;
+                }
+
+                a:hover {
+                    background-color: $table-selected-bg-color;
+                }
+
+                &.selected {
+                    background-color: $table-selected-bg-color;
+                    border-bottom: 2px $primary-color solid;
+                }
+
+            }
+
+        }
+
+    }
+
+    .bootstrap-select.btn-group .dropdown-toggle .caret {
+        right: 5px;
+    }
+
+    .bootstrap-select .dropdown-toggle:focus {
+        outline: none !important;
+    }
+
+}

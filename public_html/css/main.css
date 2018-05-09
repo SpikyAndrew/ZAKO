@@ -1,0 +1,711 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 19:01:02
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 19:36:12
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0; }
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+th {
+  font-weight: bold; }
+
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 21:09:35
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+.flex-cols-box {
+  display: flex;
+  flex-flow: column;
+  flex-direction: column; }
+
+.flex-rows-box {
+  display: flex;
+  flex-flow: row;
+  flex-direction: row; }
+
+.flex-row {
+  flex: 1 0 auto; }
+
+.flex-col {
+  flex: 0 1 auto; }
+
+.flex-1-item, .flex-2-item, .flex-3-item, .flex-4-item {
+  min-height: 0;
+  min-width: 0; }
+
+.flex-1-item {
+  flex: 1; }
+
+.flex-2-item {
+  flex: 2; }
+
+.flex-3-item {
+  flex: 3; }
+
+.flex-4-item {
+  flex: 4; }
+
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:13:49
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 19:36:12
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0; }
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+th {
+  font-weight: bold; }
+
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:22:26
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+body.material .nav-pills li a[data-toggle="pill"] {
+  background: none;
+  color: #ffffff; }
+body.material .nav-pills li.active {
+  background: #388E3C; }
+body.material .btn-group.bootstrap-select .btn.dropdown-toggle.btn-default {
+  position: relative;
+  top: -2px;
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+  border-radius: 0px;
+  line-height: 100%;
+  background: transparent;
+  height: 24px;
+  padding: 0px;
+  margin-bottom: -2px;
+  box-shadow: none; }
+  body.material .btn-group.bootstrap-select .btn.dropdown-toggle.btn-default:focus {
+    outline: none;
+    border-bottom-color: #FFC107 !important; }
+  body.material .btn-group.bootstrap-select .btn.dropdown-toggle.btn-default:hover {
+    border-bottom-color: #388E3C;
+    transform: none;
+    box-shadow: none; }
+  body.material .btn-group.bootstrap-select .btn.dropdown-toggle.btn-default span.filter-option {
+    position: relative;
+    top: 2px; }
+body.material .btn-group.bootstrap-select .dropdown-menu > li > a {
+  padding-left: 10px;
+  padding-right: 10px; }
+body.material .btn-group.bootstrap-select div.dropdown-menu {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  padding: 0px;
+  /*background: $table-selected-bg-color;*/
+  /*border-radius: 0px;*/
+  border: 0px; }
+  body.material .btn-group.bootstrap-select div.dropdown-menu ul li a:focus {
+    outline: none !important; }
+  body.material .btn-group.bootstrap-select div.dropdown-menu ul li a:hover {
+    background-color: #E8F5E9; }
+  body.material .btn-group.bootstrap-select div.dropdown-menu ul li.selected {
+    background-color: #E8F5E9;
+    border-bottom: 2px #4CAF50 solid; }
+body.material .bootstrap-select.btn-group .dropdown-toggle .caret {
+  right: 5px; }
+body.material .bootstrap-select .dropdown-toggle:focus {
+  outline: none !important; }
+
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:22:26
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+body {
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  font-family: "RobotoDraft","Roboto",sans-serif; }
+
+.box-shadow, .content-box, #right-column, .action-bar, .title-bar-flex, .title-bar-flex-second, #bottom-pane .bottom {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26); }
+
+.test {
+  border: 1px dotted #dedede;
+  position: absolute;
+  left: 0px;
+  top: 30px;
+  right: 0px;
+  bottom: 0px; }
+
+.content-box, #right-column {
+  z-index: 5;
+  background: #FFFFFF; }
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"], button, .button {
+  background: #FFC107;
+  color: #ffffff;
+  border: 0px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  padding-left: 21px;
+  padding-right: 21px;
+  font-size: 18px;
+  height: 30px;
+  line-height: 33px;
+  outline: 0 !important;
+  transition: all 200ms ease; }
+  input[type="button"]:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover, button:hover, .button:hover {
+    /*        background: $button-hover-background-color;
+            color: $button-hover-font-color;*/
+    transform: scale(1.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); }
+  input[type="button"]:focus,
+  input[type="submit"]:focus,
+  input[type="reset"]:focus, button:focus, .button:focus {
+    outline: none; }
+
+input.button-rised, a.button-rised, button.button-rised {
+  background: #4CAF50;
+  border: none;
+  border-radius: 0px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); }
+  input.button-rised:hover, a.button-rised:hover, button.button-rised:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.43);
+    transform: scale(1.02); }
+
+.circle-button, .circle-button-small {
+  background: #FFC107;
+  color: #ffffff;
+  border: 0px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 100%;
+  padding: 0px;
+  text-indent: 0px;
+  font-size: 18px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 43px;
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.circle-button-small {
+  font-size: 12px;
+  height: 30px;
+  width: 30px;
+  line-height: 33px;
+  margin-left: 3.75px;
+  margin-right: 3.75px; }
+
+#asm-code-bar {
+  overflow: auto;
+  width: 350px;
+  flex: 0 0 350px;
+  display: flex;
+  flex-flow: column; }
+  #asm-code-bar textarea#asm-code-ta {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0px;
+    resize: none;
+    background: #FFFFFF;
+    border: none; }
+
+#right-column {
+  flex: 1 0 auto;
+  display: flex;
+  flex-flow: column;
+  background: #ffffff;
+  margin-left: 20px; }
+  #right-column #core-block {
+    display: block; }
+  #right-column #nav-div {
+    margin-bottom: 20px; }
+    #right-column #nav-div .content-box, #right-column #nav-div #right-column {
+      position: relative; }
+  #right-column #ALU-command {
+    position: relative;
+    top: -20px;
+    left: 25px; }
+
+.action-bar {
+  width: 100vw;
+  height: 55px;
+  background: #4CAF50;
+  color: #ffffff;
+  font-size: 1.8em;
+  line-height: 50px;
+  text-align: center;
+  z-index: 20;
+  position: relative;
+  border-top: 5px solid #388E3C; }
+  .action-bar .action-buttons-left {
+    position: absolute;
+    left: 0px;
+    top: 10px; }
+    .action-bar .action-buttons-left .button {
+      float: left;
+      margin-left: 10px;
+      height: 30px;
+      border-radius: 5px;
+      /*line-height: $action-bar-height - 2*$action-bar-padding;*/
+      line-height: 31.5px;
+      display: block;
+      text-align: center;
+      padding-left: 10px;
+      padding-right: 10px;
+      color: #ffffff;
+      /*margin-left: 5px;*/ }
+    .action-bar .action-buttons-left a.button {
+      text-decoration: none; }
+  .action-bar .action-buttons {
+    position: absolute;
+    right: 10px;
+    top: 10px; }
+    .action-bar .action-buttons .button {
+      float: right;
+      margin-left: 10px;
+      height: 30px;
+      border-radius: 5px;
+      /*line-height: $action-bar-height - 2*$action-bar-padding;*/
+      line-height: 31.5px;
+      display: block;
+      text-align: center;
+      padding-left: 10px;
+      padding-right: 10px;
+      color: #ffffff; }
+    .action-bar .action-buttons a.button {
+      text-decoration: none; }
+
+.title-bar-flex, .title-bar-flex-second {
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #ffffff;
+  z-index: 19;
+  background-color: #727272; }
+
+.title-bar-flex-second {
+  background-color: #4CAF50;
+  position: relative; }
+
+#content {
+  background-color: #ffffff;
+  padding: 20px; }
+
+.body {
+  height: 100vh; }
+
+#bottom-pane {
+  /*background: #dedede;*/
+  flex-flow: column;
+  display: flex;
+  position: relative; }
+  #bottom-pane .tab-pane {
+    padding: 10px; }
+  #bottom-pane .bottom {
+    width: 100%;
+    height: 40px;
+    background: #4CAF50;
+    position: absolute;
+    bottom: 0px; }
+  #bottom-pane table thead th {
+    text-align: center; }
+  #bottom-pane input[type=text],
+  #bottom-pane input[type=number] {
+    line-height: 100%;
+    border: none;
+    border-bottom: 2px solid #4CAF50;
+    background: transparent;
+    height: 22px;
+    padding: 0px; }
+    #bottom-pane input[type=text]:focus,
+    #bottom-pane input[type=number]:focus {
+      outline: none;
+      border-bottom-color: #FFC107 !important; }
+    #bottom-pane input[type=text]:hover,
+    #bottom-pane input[type=number]:hover {
+      border-bottom-color: #388E3C; }
+  #bottom-pane #tab-microcode table {
+    margin-top: 15px; }
+    #bottom-pane #tab-microcode table thead {
+      position: fixed;
+      z-index: 200;
+      display: block;
+      /*top: 0px;*/
+      /*left: 0px;*/
+      margin-top: -25px;
+      background: #ffffff; }
+      #bottom-pane #tab-microcode table thead th {
+        background: #ffffff; }
+    #bottom-pane #tab-microcode table tbody td {
+      text-align: center;
+      /*border-bottom: 1px solid $secondary-color;*/ }
+      #bottom-pane #tab-microcode table tbody td select {
+        appearance: none;
+        -moz-appearance: none;
+        /* Firefox */
+        -webkit-appearance: none;
+        /* Safari and Chrome */
+        height: 20px;
+        border: 0px;
+        border-bottom: 2px solid #4CAF50;
+        padding-left: 5px;
+        padding-right: 18px;
+        background: transparent;
+        background: url("../img/br_down_8.png") no-repeat right 5px center; }
+        #bottom-pane #tab-microcode table tbody td select:focus {
+          outline: none;
+          border-bottom-color: #FFC107; }
+      #bottom-pane #tab-microcode table tbody td .remove-button {
+        position: relative;
+        top: 3px; }
+    #bottom-pane #tab-microcode table tbody tr {
+      /*border-top: transparent 5px solid;*/ }
+      #bottom-pane #tab-microcode table tbody tr td input {
+        position: relative;
+        top: -2px; }
+      #bottom-pane #tab-microcode table tbody tr.executing td, #bottom-pane #tab-microcode table tbody tr.executing th {
+        background: #E8F5E9; }
+    #bottom-pane #tab-microcode table tbody th {
+      text-align: right;
+      padding-right: 5px; }
+      #bottom-pane #tab-microcode table tbody th i.fa {
+        cursor: move;
+        float: left;
+        margin-left: 5px;
+        color: #727272;
+        top: 3px;
+        position: relative; }
+      #bottom-pane #tab-microcode table tbody th span {
+        position: relative;
+        top: 2px; }
+  #bottom-pane .add-button {
+    margin-top: 20px;
+    margin-bottom: 20px; }
+  #bottom-pane .remove-button {
+    color: #D50000;
+    cursor: pointer; }
+  #bottom-pane #tab-jumptable table#jumpTable {
+    width: 420px;
+    text-align: center;
+    margin: 0 auto; }
+    #bottom-pane #tab-jumptable table#jumpTable .remove-button {
+      color: #D50000;
+      cursor: pointer;
+      line-height: 20px;
+      position: relative;
+      top: 3px; }
+  #bottom-pane #tab-jumptable .add-button {
+    margin-top: 20px;
+    margin-bottom: 20px; }
+  #bottom-pane #tab-jumptable #jumptable-contents {
+    text-align: center;
+    position: relative; }
+
+.monospace {
+  font-family: monospace; }
+
+.tab-content {
+  overflow: auto;
+  flex: 1;
+  position: absolute;
+  min-height: 0px;
+  top: 0px;
+  bottom: 40px;
+  left: 0px;
+  right: 0px;
+  z-index: 5000; }
+
+#bottom-pane #tab-memory {
+  width: 100%; }
+  #bottom-pane #tab-memory table {
+    width: 100%;
+    text-align: center;
+    min-height: 0; }
+    #bottom-pane #tab-memory table tr {
+      webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
+    #bottom-pane #tab-memory table td:hover {
+      background: #E8F5E9; }
+    #bottom-pane #tab-memory table td, #bottom-pane #tab-memory table th {
+      text-align: center;
+      padding-left: 2.5px;
+      padding-right: 2.5px;
+      font-family: monospace; }
+      #bottom-pane #tab-memory table td input, #bottom-pane #tab-memory table th input {
+        width: 85px;
+        text-align: center;
+        height: 17px;
+        margin: -2px;
+        margin-left: -8px;
+        margin-right: -8px; }
+      #bottom-pane #tab-memory table td.selected, #bottom-pane #tab-memory table th.selected {
+        background: #E8F5E9; }
+
+ol#registerList, ul#registerList {
+  list-style: decimal-leading-zero;
+  padding-left: 40px;
+  padding-top: 5px;
+  text-align: center; }
+
+ol#register-List {
+  padding: 5px 10px;
+  -webkit-column-count: 2;
+  /* Chrome, Safari, Opera */
+  -moz-column-count: 2;
+  /* Firefox */
+  column-count: 2; }
+
+div.box {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+.box-padding {
+  padding: 5px; }
+
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-04-05, 01:42:34
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:22:26
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+#architectureBox {
+  height: 100%;
+  padding-bottom: 30px;
+  position: relative; }
+  #architectureBox #architectureDiagram {
+    position: relative;
+    height: 100%; }
+    #architectureBox #architectureDiagram #alu {
+      position: absolute;
+      left: 320px;
+      top: 0px;
+      width: 50px;
+      height: 100px; }
+      #architectureBox #architectureDiagram #alu img {
+        width: 50px;
+        height: 100px; }
+    #architectureBox #architectureDiagram #microcode-block {
+      position: absolute;
+      left: 50px;
+      top: 120px;
+      width: 80px;
+      height: 80px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 80px; }
+    #architectureBox #architectureDiagram #uArIncrementer {
+      position: absolute;
+      left: 50px;
+      top: 10px;
+      width: 50px;
+      height: 50px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 50px; }
+    #architectureBox #architectureDiagram #uAR-register {
+      position: absolute;
+      left: 50px;
+      top: 70px;
+      background: #4CAF50;
+      text-align: center;
+      padding: 5px; }
+    #architectureBox #architectureDiagram #memory-block {
+      position: absolute;
+      left: 50px;
+      top: 320px;
+      width: 80px;
+      height: 80px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 80px; }
+    #architectureBox #architectureDiagram #jumptable-block {
+      position: absolute;
+      left: 50px;
+      top: 220px;
+      width: 80px;
+      height: 80px;
+      background: #4CAF50;
+      text-align: center;
+      line-height: 80px; }
+    #architectureBox #architectureDiagram #arch-regA, #architectureBox #architectureDiagram #arch-regB, #architectureBox #architectureDiagram #arch-regC {
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      background: #4CAF50; }
+    #architectureBox #architectureDiagram #arch-regA, #architectureBox #architectureDiagram #arch-regB {
+      left: 320px; }
+    #architectureBox #architectureDiagram #arch-regA {
+      top: 120px; }
+    #architectureBox #architectureDiagram #arch-regB {
+      top: 160px; }
+    #architectureBox #architectureDiagram #arch-regC {
+      right: 40px;
+      top: 140px; }
+    #architectureBox #architectureDiagram #registersWrapper {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding-left: 320px;
+      width: 100%; }
+      #architectureBox #architectureDiagram #registersWrapper #registers {
+        position: absolute;
+        top: 70px;
+        left: 50%;
+        /*margin-left: -$registersWidth/2;*/ }
+        #architectureBox #architectureDiagram #registersWrapper #registers ol {
+          background-color: #E8F5E9;
+          margin-bottom: 0px;
+          padding: 5px 10px; }
+        #architectureBox #architectureDiagram #registersWrapper #registers ul#architectureRegisters {
+          margin-top: 10px; }
+        #architectureBox #architectureDiagram #registersWrapper #registers ul.register-list {
+          padding: 0px; }
+          #architectureBox #architectureDiagram #registersWrapper #registers ul.register-list li {
+            height: 30px;
+            line-height: 30px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            background-color: #E8F5E9; }
+    #architectureBox #architectureDiagram canvas#archConnections {
+      z-index: -10; }
+
+.bottom .nav.nav-pills {
+  float: left; }
+.bottom .action-buttons {
+  float: right;
+  padding: 5px 5px; }
+  .bottom .action-buttons .button {
+    float: right;
+    margin-left: 10px;
+    height: 30px;
+    border-radius: 5px;
+    /*line-height: $action-bar-height - 2*$action-bar-padding;*/
+    line-height: 31.5px;
+    display: block;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff; }
+  .bottom .action-buttons a.button {
+    text-decoration: none; }
+
+#help-dialog code {
+  background: transparent;
+  color: #000;
+  padding: 0px; }
+  #help-dialog code .asm-comment {
+    color: #4CAF50; }
+  #help-dialog code .asm-mnemonic {
+    color: #2F91E7; }
+  #help-dialog code .asm-label {
+    color: #194D7A; }
+
+/*# sourceMappingURL=main.css.map */

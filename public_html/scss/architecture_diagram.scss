@@ -1,0 +1,170 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-04-05, 01:42:34
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+
+@import "skin.scss";
+
+$aluLeftMargin: 320px;
+$registerLinePadding: 20px;
+$aluTop: 0px;
+$aluWidth: 50px;
+$aluHeight: 100px;
+
+$singleRegisterHeight: 20px;
+$singleRegisterWidth: 100px;
+
+$registersWidth: 240px;
+
+#architectureBox {
+    height: 100%;
+    padding-bottom: 30px;
+    position: relative;
+
+    #architectureDiagram {
+
+        position: relative;
+        height: 100%;
+
+
+
+        #alu {
+            position: absolute;
+            left: $aluLeftMargin;
+            top: $aluTop;
+            width: $aluWidth;
+            height: $aluHeight;
+
+            img {
+                width: $aluWidth;
+                height: $aluHeight;
+            }
+        }
+
+
+        #microcode-block {
+            position: absolute;
+            left: 50px;
+            top: 120px;
+            width: 80px;
+            height: 80px;
+            background: $primary-color;
+            text-align: center;
+            line-height: 80px;
+        }
+
+        #uArIncrementer {
+            position: absolute;
+            left: 50px;
+            top: 10px;
+            width: 50px;
+            height: 50px;
+            background: $primary-color;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #uAR-register {
+            position: absolute;
+            left: 50px;
+            top: 70px;
+            background: $primary-color;
+            text-align: center;
+            padding: 5px;
+        }
+
+        #memory-block {
+			position: absolute;
+            left: 50px;
+            top: 320px;
+            width: 80px;
+            height: 80px;
+            background: $primary-color;
+            text-align: center;
+            line-height: 80px;
+        }
+
+        #jumptable-block {
+
+            position: absolute;
+            left: 50px;
+            top: 220px;
+            width: 80px;
+            height: 80px;
+            background: $primary-color;
+            text-align: center;
+            line-height: 80px;
+        }
+
+        #arch-regA,#arch-regB,#arch-regC {
+            position: absolute;
+            width: $singleRegisterWidth;
+            height: $singleRegisterHeight;
+            background: $primary-color;
+        }
+
+        #arch-regA,#arch-regB {
+            left: $aluLeftMargin;
+        }
+        #arch-regA {
+            top: $aluTop+$aluHeight+$singleRegisterHeight;
+        }
+        #arch-regB {
+            top: $aluTop+$aluHeight+$singleRegisterHeight*3;
+        }
+
+        #arch-regC {
+            right: 2*$registerLinePadding;
+            top: $aluTop+$aluHeight+$singleRegisterHeight*2;
+        }
+
+        #registersWrapper {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            padding-left: $aluLeftMargin;
+            width: 100%;
+
+            #registers {
+
+                position: absolute;
+                top: $aluTop+$aluHeight/2 + $singleRegisterHeight;
+                left: 50%;
+                /*margin-left: -$registersWidth/2;*/
+
+                ol {
+                    background-color: $table-selected-bg-color;
+                    margin-bottom: 0px;
+                    padding: 5px 10px;
+                }
+
+                ul#architectureRegisters {
+                    margin-top: 10px;
+                }
+                ul.register-list {
+                    padding: 0px;
+
+                    li {
+                        height: 30px;
+                        line-height: 30px;
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        background-color: $table-selected-bg-color;
+                    }
+                }
+            }
+
+        }
+
+
+        canvas#archConnections {
+            z-index: -10;
+
+        }
+    }
+}

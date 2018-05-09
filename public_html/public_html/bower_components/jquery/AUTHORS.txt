@@ -1,0 +1,278 @@
+Authors ordered by first contribution.
+
+John Resig <jeresig@eti.pg.gda.pl>
+Gilles van den Hoven <gilles0181@eti.pg.gda.pl>
+Michael Geary <mike@geary.com>
+Stefan Petre <stefan.petre@eti.pg.gda.pl>
+Yehuda Katz <wycats@eti.pg.gda.pl>
+Corey Jewett <cj@syntheticplayground.com>
+Klaus Hartl <klaus.hartl@eti.pg.gda.pl>
+Franck Marcia <franck.marcia@eti.pg.gda.pl>
+Jörn Zaefferer <joern.zaefferer@eti.pg.gda.pl>
+Paul Bakaus <paul.bakaus@eti.pg.gda.pl>
+Brandon Aaron <brandon.aaron@eti.pg.gda.pl>
+Mike Alsup <malsup@eti.pg.gda.pl>
+Dave Methvin <dave.methvin@eti.pg.gda.pl>
+Ed Engelhardt <edengelhardt@eti.pg.gda.pl>
+Sean Catchpole <littlecooldude@eti.pg.gda.pl>
+Paul Mclanahan <pmclanahan@eti.pg.gda.pl>
+David Serduke <davidserduke@eti.pg.gda.pl>
+Richard D. Worth <rdworth@eti.pg.gda.pl>
+Scott González <scott.gonzalez@eti.pg.gda.pl>
+Ariel Flesler <aflesler@eti.pg.gda.pl>
+Jon Evans <jon@springyweb.com>
+TJ Holowaychuk <tj@vision-media.ca>
+Michael Bensoussan <mickey@seesmic.com>
+Robert Katić <robert.katic@eti.pg.gda.pl>
+Louis-Rémi Babé <lrbabe@eti.pg.gda.pl>
+Earle Castledine <mrspeaker@eti.pg.gda.pl>
+Damian Janowski <damian.janowski@eti.pg.gda.pl>
+Rich Dougherty <rich@rd.gen.nz>
+Kim Dalsgaard <kim@kimdalsgaard.com>
+Andrea Giammarchi <andrea.giammarchi@eti.pg.gda.pl>
+Mark Gibson <jollytoad@eti.pg.gda.pl>
+Karl Swedberg <kswedberg@eti.pg.gda.pl>
+Justin Meyer <justinbmeyer@eti.pg.gda.pl>
+Ben Alman <cowboy@rj3.net>
+James Padolsey <cla@padolsey.net>
+David Petersen <public@petersendidit.com>
+Batiste Bieler <batiste.bieler@eti.pg.gda.pl>
+Alexander Farkas <info@corrupt-system.de>
+Rick Waldron <waldron.rick@eti.pg.gda.pl>
+Filipe Fortes <filipe@fortes.com>
+Neeraj Singh <neerajdotname@eti.pg.gda.pl>
+Paul Irish <paul.irish@eti.pg.gda.pl>
+Iraê Carvalho <irae@irae.pro.br>
+Matt Curry <matt@pseudocoder.com>
+Michael Monteleone <michael@michaelmonteleone.net>
+Noah Sloan <noah.sloan@eti.pg.gda.pl>
+Tom Viner <github@viner.tv>
+Douglas Neiner <doug@dougneiner.com>
+Adam J. Sontag <ajpiano@ajpiano.com>
+Dave Reed <dareed@microsoft.com>
+Ralph Whitbeck <ralph.whitbeck@eti.pg.gda.pl>
+Carl Fürstenberg <azatoth@eti.pg.gda.pl>
+Jacob Wright <jacwright@eti.pg.gda.pl>
+J. Ryan Stinnett <jryans@eti.pg.gda.pl>
+unknown <Igen005@.upcorp.ad.uprr.com>
+temp01 <temp01irc@eti.pg.gda.pl>
+Heungsub Lee <h@subl.ee>
+Colin Snover <github.com@zetafleet.com>
+Ryan W Tenney <ryan@10e.us>
+Pinhook <contact@pinhooklabs.com>
+Ron Otten <r.j.g.otten@eti.pg.gda.pl>
+Jephte Clain <Jephte.Clain@univ-reunion.fr>
+Anton Matzneller <obhvsbypqghgc@eti.pg.gda.pl>
+Alex Sexton <AlexSexton@eti.pg.gda.pl>
+Dan Heberden <danheberden@eti.pg.gda.pl>
+Henri Wiechers <hwiechers@eti.pg.gda.pl>
+Russell Holbrook <russell.holbrook@patch.com>
+Julian Aubourg <aubourg.julian@eti.pg.gda.pl>
+Gianni Alessandro Chiappetta <gianni@runlevel6.org>
+Scott Jehl <scottjehl@eti.pg.gda.pl>
+James Burke <jrburke@eti.pg.gda.pl>
+Jonas Pfenniger <jonas@pfenniger.name>
+Xavi Ramirez <xavi.rmz@eti.pg.gda.pl>
+Jared Grippe <jared@deadlyicon.com>
+Sylvester Keil <sylvester@keil.or.at>
+Brandon Sterne <bsterne@mozilla.com>
+Mathias Bynens <mathias@qiwi.be>
+Timmy Willison <timmywillisn@eti.pg.gda.pl>
+Corey Frang <gnarf37@eti.pg.gda.pl>
+Digitalxero <digitalxero>
+Anton Kovalyov <anton@kovalyov.net>
+David Murdoch <david@davidmurdoch.com>
+Josh Varner <josh.varner@eti.pg.gda.pl>
+Charles McNulty <cmcnulty@kznf.com>
+Jordan Boesch <jboesch26@eti.pg.gda.pl>
+Jess Thrysoee <jess@thrysoee.dk>
+Michael Murray <m@murz.net>
+Lee Carpenter <elcarpie@eti.pg.gda.pl>
+Alexis Abril <me@alexisabril.com>
+Rob Morgan <robbym@eti.pg.gda.pl>
+John Firebaugh <john_firebaugh@bigfix.com>
+Sam Bisbee <sam@sbisbee.com>
+Gilmore Davidson <gilmoreorless@eti.pg.gda.pl>
+Brian Brennan <me@brianlovesthings.com>
+Xavier Montillet <xavierm02.net@eti.pg.gda.pl>
+Daniel Pihlstrom <sciolist.se@eti.pg.gda.pl>
+Sahab Yazdani <sahab.yazdani+github@eti.pg.gda.pl>
+avaly <github-com@agachi.name>
+Scott Hughes <hi@scott-hughes.me>
+Mike Sherov <mike.sherov@eti.pg.gda.pl>
+Greg Hazel <ghazel@eti.pg.gda.pl>
+Schalk Neethling <schalk@ossreleasefeed.com>
+Denis Knauf <Denis.Knauf@eti.pg.gda.pl>
+Timo Tijhof <krinklemail@eti.pg.gda.pl>
+Steen Nielsen <swinedk@eti.pg.gda.pl>
+Anton Ryzhov <anton@ryzhov.me>
+Shi Chuan <shichuanr@eti.pg.gda.pl>
+Berker Peksag <berker.peksag@eti.pg.gda.pl>
+Toby Brain <tobyb@freshview.com>
+Matt Mueller <mattmuelle@eti.pg.gda.pl>
+Justin <drakefjustin@eti.pg.gda.pl>
+Daniel Herman <daniel.c.herman@eti.pg.gda.pl>
+Oleg Gaidarenko <markelog@eti.pg.gda.pl>
+Richard Gibson <richard.gibson@eti.pg.gda.pl>
+Rafaël Blais Masson <rafbmasson@eti.pg.gda.pl>
+cmc3cn <59194618@qq.com>
+Joe Presbrey <presbrey@eti.pg.gda.pl>
+Sindre Sorhus <sindresorhus@eti.pg.gda.pl>
+Arne de Bree <arne@bukkie.nl>
+Vladislav Zarakovsky <vlad.zar@eti.pg.gda.pl>
+Andrew E Monat <amonat@eti.pg.gda.pl>
+Oskari <admin@o-programs.com>
+Joao Henrique de Andrade Bruni <joaohbruni@yahoo.com.br>
+tsinha <tsinha@Anthonys-MacBook-Pro.local>
+Matt Farmer <matt@frmr.me>
+Trey Hunner <treyhunner@eti.pg.gda.pl>
+Jason Moon <jmoon@socialcast.com>
+Jeffery To <jeffery.to@eti.pg.gda.pl>
+Kris Borchers <kris.borchers@eti.pg.gda.pl>
+Vladimir Zhuravlev <private.face@eti.pg.gda.pl>
+Jacob Thornton <jacobthornton@eti.pg.gda.pl>
+Chad Killingsworth <chadkillingsworth@missouristate.edu>
+Nowres Rafid <nowres.rafed@eti.pg.gda.pl>
+David Benjamin <davidben@mit.edu>
+Uri Gilad <antishok@eti.pg.gda.pl>
+Chris Faulkner <thefaulkner@eti.pg.gda.pl>
+Elijah Manor <elijah.manor@eti.pg.gda.pl>
+Daniel Chatfield <chatfielddaniel@eti.pg.gda.pl>
+Nikita Govorov <nikita.govorov@eti.pg.gda.pl>
+Wesley Walser <waw325@eti.pg.gda.pl>
+Mike Pennisi <mike@mikepennisi.com>
+Markus Staab <markus.staab@redaxo.de>
+Dave Riddle <david@joyvuu.com>
+Callum Macrae <callum@lynxphp.com>
+Benjamin Truyman <bentruyman@eti.pg.gda.pl>
+James Huston <james@jameshuston.net>
+Erick Ruiz de Chávez <erickrdch@eti.pg.gda.pl>
+David Bonner <dbonner@cogolabs.com>
+Akintayo Akinwunmi <aakinwunmi@judge.com>
+MORGAN <morgan@morgangraphics.com>
+Ismail Khair <ismail.khair@eti.pg.gda.pl>
+Carl Danley <carldanley@eti.pg.gda.pl>
+Mike Petrovich <michael.c.petrovich@eti.pg.gda.pl>
+Greg Lavallee <greglavallee@wapolabs.com>
+Daniel Gálvez <dgalvez@editablething.com>
+Sai Lung Wong <sai.wong@huffingtonpost.com>
+Tom H Fuertes <TomFuertes@eti.pg.gda.pl>
+Roland Eckl <eckl.roland@googlemail.com>
+Jay Merrifield <fracmak@eti.pg.gda.pl>
+Allen J Schmidt Jr <cobrasoft@eti.pg.gda.pl>
+Jonathan Sampson <jjdsampson@eti.pg.gda.pl>
+Marcel Greter <marcel.greter@ocbnet.ch>
+Matthias Jäggli <matthias.jaeggli@eti.pg.gda.pl>
+David Fox <dfoxinator@eti.pg.gda.pl>
+Yiming He <yiminghe@eti.pg.gda.pl>
+Devin Cooper <cooper.semantics@eti.pg.gda.pl>
+Paul Ramos <paul.b.ramos@eti.pg.gda.pl>
+Rod Vagg <rod@vagg.org>
+Bennett Sorbo <bsorbo@eti.pg.gda.pl>
+Sebastian Burkhard <sebi.burkhard@eti.pg.gda.pl>
+Zachary Adam Kaplan <razic@viralkitty.com>
+nanto_vi <nanto@moon.email.ne.jp>
+nanto <nanto@moon.email.ne.jp>
+Danil Somsikov <danilasomsikov@eti.pg.gda.pl>
+Ryunosuke SATO <tricknotes.rs@eti.pg.gda.pl>
+Jean Boussier <jean.boussier@eti.pg.gda.pl>
+Adam Coulombe <me@adam.co>
+Andrew Plummer <plummer.andrew@eti.pg.gda.pl>
+Mark Raddatz <mraddatz@eti.pg.gda.pl>
+Isaac Z. Schlueter <i@izs.me>
+Karl Sieburg <ksieburg@yahoo.com>
+Pascal Borreli <pascal@borreli.com>
+Nguyen Phuc Lam <ruado1987@eti.pg.gda.pl>
+Dmitry Gusev <dmitry.gusev@eti.pg.gda.pl>
+Michał Gołębiowski <m.goleb@eti.pg.gda.pl>
+Li Xudong <istonelee@eti.pg.gda.pl>
+Steven Benner <admin@stevenbenner.com>
+Tom H Fuertes <tomfuertes@eti.pg.gda.pl>
+Renato Oliveira dos Santos <ros3@cin.ufpe.br>
+ros3cin <ros3@cin.ufpe.br>
+Jason Bedard <jason+jquery@jbedard.ca>
+Kyle Robinson Young <kyle@dontkry.com>
+Chris Talkington <chris@talkingtontech.com>
+Eddie Monge <eddie@eddiemonge.com>
+Terry Jones <terry@jon.es>
+Jason Merino <jasonmerino@eti.pg.gda.pl>
+Jeremy Dunck <jdunck@eti.pg.gda.pl>
+Chris Price <price.c@eti.pg.gda.pl>
+Guy Bedford <guybedford@eti.pg.gda.pl>
+Amey Sakhadeo <me@ameyms.com>
+Mike Sidorov <mikes.ekb@eti.pg.gda.pl>
+Anthony Ryan <anthonyryan1@eti.pg.gda.pl>
+Dominik D. Geyer <dominik.geyer@eti.pg.gda.pl>
+George Kats <katsgeorgeek@eti.pg.gda.pl>
+Lihan Li <frankieteardrop@eti.pg.gda.pl>
+Ronny Springer <springer.ronny@eti.pg.gda.pl>
+Chris Antaki <ChrisAntaki@eti.pg.gda.pl>
+Marian Sollmann <marian.sollmann@cargomedia.ch>
+njhamann <njhamann@eti.pg.gda.pl>
+Ilya Kantor <iliakan@eti.pg.gda.pl>
+David Hong <d.hong@me.com>
+John Paul <john@johnkpaul.com>
+Jakob Stoeck <jakob@pokermania.de>
+Christopher Jones <chris@cjqed.com>
+Forbes Lindesay <forbes@lindesay.co.uk>
+S. Andrew Sheppard <andrew@wq.io>
+Leonardo Balter <leonardo.balter@eti.pg.gda.pl>
+Roman Reiß <me@silverwind.io>
+Benjy Cui <benjytrys@eti.pg.gda.pl>
+Rodrigo Rosenfeld Rosas <rr.rosas@eti.pg.gda.pl>
+John Hoven <hovenj@eti.pg.gda.pl>
+Philip Jägenstedt <philip@foolip.org>
+Christian Kosmowski <ksmwsk@eti.pg.gda.pl>
+Liang Peng <poppinlp@eti.pg.gda.pl>
+TJ VanToll <tj.vantoll@eti.pg.gda.pl>
+Senya Pugach <upisfree@outlook.com>
+Aurelio De Rosa <aurelioderosa@eti.pg.gda.pl>
+Nazar Mokrynskyi <nazar@mokrynskyi.com>
+Amit Merchant <bullredeyes@eti.pg.gda.pl>
+Jason Bedard <jason+github@jbedard.ca>
+Arthur Verschaeve <contact@arthurverschaeve.be>
+Dan Hart <danhart@notonthehighstreet.com>
+Bin Xin <rhyzix@eti.pg.gda.pl>
+David Corbacho <davidcorbacho@eti.pg.gda.pl>
+Veaceslav Grimalschi <grimalschi@yandex.ru>
+Daniel Husar <dano.husar@eti.pg.gda.pl>
+Frederic Hemberger <mail@frederic-hemberger.de>
+Ben Toews <mastahyeti@eti.pg.gda.pl>
+Aditya Raghavan <araghavan3@eti.pg.gda.pl>
+Victor Homyakov <vkhomyackov@eti.pg.gda.pl>
+Shivaji Varma <contact@shivajivarma.com>
+Nicolas HENRY <icewil@eti.pg.gda.pl>
+Anne-Gaelle Colom <coloma@westminster.ac.uk>
+George Mauer <gmauer@eti.pg.gda.pl>
+Leonardo Braga <leonardo.braga@eti.pg.gda.pl>
+Stephen Edgar <stephen@netweb.com.au>
+Thomas Tortorini <thomastortorini@eti.pg.gda.pl>
+Winston Howes <winstonhowes@eti.pg.gda.pl>
+Jon Hester <jon.d.hester@eti.pg.gda.pl>
+Alexander O'Mara <me@alexomara.com>
+Bastian Buchholz <buchholz.bastian@googlemail.com>
+Arthur Stolyar <nekr.fabula@eti.pg.gda.pl>
+Calvin Metcalf <calvin.metcalf@eti.pg.gda.pl>
+Mu Haibao <mhbseal@163.com>
+Richard McDaniel <rm0026@uah.edu>
+Chris Rebert <github@rebertia.com>
+Gabriel Schulhof <gabriel.schulhof@intel.com>
+Gilad Peleg <giladp007@eti.pg.gda.pl>
+Martin Naumann <martin@geekonaut.de>
+Marek Lewandowski <m.lewandowski@cksource.com>
+Bruno Pérel <brunoperel@eti.pg.gda.pl>
+Reed Loden <reed@reedloden.com>
+Daniel Nill <daniellnill@eti.pg.gda.pl>
+Yongwoo Jeon <yongwoo.jeon@navercorp.com>
+Sean Henderson <seanh.za@eti.pg.gda.pl>
+Richard Kraaijenhagen <stdin+git@riichard.com>
+Connor Atherton <c.liam.atherton@eti.pg.gda.pl>
+Gary Ye <garysye@eti.pg.gda.pl>
+Christian Grete <webmaster@christiangrete.com>
+Liza Ramo <liza.h.ramo@eti.pg.gda.pl>
+Julian Alexander Murillo <julian.alexander.murillo@eti.pg.gda.pl>
+Joelle Fleurantin <joasqueeniebee@eti.pg.gda.pl>
+Jun Sun <klsforever@eti.pg.gda.pl>
+Devin Wilson <dwilson6.github@eti.pg.gda.pl>
+Todor Prikumov <tono_pr@abv.bg>
+Zack Hall <zackhall@outlook.com>

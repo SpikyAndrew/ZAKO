@@ -1,0 +1,9 @@
+{
+   "compileOnSave": true,
+   "compilerOptions": {
+		"noImplicitAny" : true,
+		"preserveConstEnums": true,
+		"outFile": "js-ts/tsc.js",
+		"sourceMap": true
+   }
+}

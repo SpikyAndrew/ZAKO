@@ -1,0 +1,64 @@
+/*
+ WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
+*/
+/* 
+    Created on : 2016-03-21, 22:22:26
+    Author     : J.Demk <demjot at eti.pg.gda.pl>
+*/
+
+$primary-color: #4CAF50; 
+$primary-color-darker: #388E3C; 
+$secondary-color: #727272; //#90A4AE;
+$accent-color: #FFC107;
+
+$accent-color-light: #FFECB3;
+
+$dark-accent-color: #78909C;
+
+$dark-bg-color: #FFFFFF;
+$bg-color: #ffffff;
+
+$action-bar-text-color: #ffffff;
+$action-bar-height: 50px;
+$action-bar-border-height: 5px;
+$action-bar-zindex: 20;
+$action-bar-padding: 10px;
+
+$action-button-border-radius: 5px;
+$action-button-padding: 10px;
+
+$primary-font-color: #ffffff;
+
+$title-bar-height: 30px;
+$title-bar-font-color: #ffffff;
+$title-bar-zindex: 19;
+
+
+$content-margin: 20px;
+
+$asm-bar-width: 350px;
+
+$button-height: 30px;
+$button-font-size: 18px;
+$button-background-color: $accent-color;
+$button-font-color: $primary-font-color;
+
+$circle-button-height: 40px;
+$circle-button-small-height: 30px;
+$circle-button-shadow: 0 3px 10px rgba(0,0,0,0.23),0 3px 10px rgba(0,0,0,0.16);
+$circle-button-hover-shadow: 0 5px 10px rgba(0,0,0,0.40);
+
+$button-hover-background-color: $primary-color;
+$button-hover-font-color: $primary-font-color;
+
+
+
+$button-shadow: 0 3px 10px rgba(0,0,0,0.23),0 3px 10px rgba(0,0,0,0.16);
+$button-hover-shadow: 0 5px 10px rgba(0,0,0,0.40);
+
+$rised-button-shadow: 0 3px 8px rgba(0,0,0,0.30);
+$rised-button-shadow-hover: 0 3px 8px rgba(0,0,0,0.43);
+
+$table-selected-bg-color: #E8F5E9;
+
+$remove-color: #D50000;
