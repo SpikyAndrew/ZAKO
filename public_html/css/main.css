@@ -583,13 +583,22 @@ div.box {
     height: 100%; }
     #architectureBox #architectureDiagram #alu {
       position: absolute;
-      left: 320px;
+      left: 340px;
       top: 0px;
       width: 50px;
       height: 100px; }
       #architectureBox #architectureDiagram #alu img {
         width: 50px;
         height: 100px; }
+		#architectureBox #architectureDiagram #barrelShifter {
+      position: absolute;
+      left: 240px;
+      top: 50px;
+      width: 50px;
+      height: 50px; 
+	  background: #4CAF50;
+	  text-align: center;
+	  }
     #architectureBox #architectureDiagram #microcode-block {
       position: absolute;
       left: 50px;

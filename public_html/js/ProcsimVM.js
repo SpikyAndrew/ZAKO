@@ -12,7 +12,7 @@ function ProcsimVM(updateAsmExecLineCb, updateUAdrLine, $textarea) {
 	self.$textarea = $textarea;
 
 	self.registerList = new RegistersList(10);
-	self.additionalRegistersNames = ['TEMP1', 'TEMP2'];
+	self.additionalRegistersNames = ['TEMP1', 'TEMP2', 'CPSR'];
 	self.architectureRegisters = new ArchitectureRegisters(self.additionalRegistersNames);
 	self.microcode = new MicrocodeTable(true);
 	self.microcodeOpts = microcodeOptions;

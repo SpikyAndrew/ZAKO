@@ -26,6 +26,9 @@
 
         <script type="text/javascript" src="js/linedtextarea/jquery-linedtextarea.js"></script>
 
+		<script type="text/javascript" src="js/barrelShifter.js"></script>
+		<script type="text/javascript" src="js/conditionalExecution.js"></script>
+		
         <script type="text/javascript" src="js/observer.js"></script>
         <script type="text/javascript" src="js/register_list.js"></script>
         <script type='text/javascript' src='js/memory_matrix.js'></script>
@@ -83,8 +86,10 @@ mov R1,20;</textarea>
                                             <img src="img/alu.svg" alt="ALU"/>
                                             <span data-bind="text: interpreter.currentMcRow()?interpreter.currentMcRow().ALU:''" id="ALU-command"></span>
                                         </div>
-
-
+										<div id="barrelShifter">
+                                            Barrel Shifter
+                                            <!--<span data-bind="text: interpreter.currentMcRow()?interpreter.currentMcRow().ALU:''" id="shitfer-command"></span>-->
+                                        </div>
                                         <div id="arch-regA">A: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.A())"></span></div>
                                         <div id="arch-regB">B: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.B())"></span></div>
                                         <div id="arch-regC">C: <span data-bind="text: convertToHexWithLeading(architectureRegisters.registers.C())"></span></div>
@@ -207,6 +212,7 @@ mov R1,20;</textarea>
                                             <th>&micro;Addr</th>
                                             <th>Label</th>
                                             <th>ALU</th>
+											<th>BShifter</th>
                                             <th>S1</th>
                                             <th>S2</th>
                                             <th>Dest</th>
@@ -230,6 +236,7 @@ mov R1,20;</textarea>
                                             <td>
                                                 <select data-bind="options: Object.keys($root.microcodeOpts.aluOperations),optionsCaption: '', value: ALU"></select>
                                             </td>
+											<td><select data-bind="options: $root.microcodeOpts.barrelShifterOpts, value: BShifter,optionsCaption: ''"></select></td>
                                             <td><select data-bind="options: $root.microcodeOpts.s1opts, value: S1,optionsCaption: ''"></select></td>
                                             <td><select data-bind="options: $root.microcodeOpts.s2opts, value: S2,optionsCaption: ''"></select></td>
                                             <td><select data-bind="options: $root.microcodeOpts.destOpts, value: Dest,optionsCaption: ''"></select></td>

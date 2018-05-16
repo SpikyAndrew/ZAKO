@@ -1,7 +1,7 @@
 /* 
  *  WxFramework all rights reserved to J.Demk <demjot at eti.pg.gda.pl>
  */
-
+	
 function MipsState(interpreter) {
 	var self = this;
 	self.interpreter = interpreter;
@@ -228,6 +228,10 @@ AsmInterpreter.prototype = {
 			if (microcodeRow.Dest() && microcodeRow.Dest().length > 0) {
 				var args = this.getAluArgsValues(microcodeRow);
 				console.log(args);
+				if(microcodeRow.BShifter==='Apply')
+				{
+			// TODO		args[1] = 
+				}
 				var result = this.microcodeOptions.aluOperations[microcodeRow.ALU()].apply(this, args);
 				this.architectureRegisters.setRegisterValue(microcodeRow.Dest(), result);
 			} else {
@@ -334,10 +338,17 @@ AsmInterpreter.prototype = {
 
 			var regs = [];
 			var imms = [];
+			var shifts = [];
+			var conditionals = [];
 			for (var i = 0; i < args.length; i++) {
 				if (this.isRegister(args[i])) {
 					regs.push(this.registerList.getRegisterNumber(args[i]));
-				} else {
+				} else if (isShifterArg(args[i])){
+					shifts.push(args[i]);
+				} else if (isConditional(args[i])){
+					shifts.push(args[i]);
+				}
+				else {
 					var number = parseInt(args[i]);
 					if (!isNaN(number)) {
 						imms.push(number);
@@ -357,10 +368,16 @@ AsmInterpreter.prototype = {
 			}
 
 			if (regs.length === 0) {
-				if (imms.length === 1) {
-					return (mnemonicNumber << 24) | (imms[0] & 0x00ffffff); // 24 bity na liczbę
-				} else if (regs.length === 0 && imms.length === 0) {
-					return (mnemonicNumber << 24); // tylko kod rozkazu na najstarszym miejscu
+				if (imms.length === 1) 
+					{
+						if (shifts.length > 0){
+							throw new Error('Użyto przesunięcia bitowego w poleceniu ze zmienną bezpośrednią')
+						}
+						// cond4|Opcode8|Imm20|
+						return (encodeConditional(conditionals[0]) << 28 | mnemonicNumber << 20) | (imms[0] & 0x00ffffff); // 20 bitów na liczbę
+					} 
+				else if (regs.length === 0 && imms.length === 0) {
+					return (encodeConditional(conditionals[0]) << 28 | mnemonicNumber << 20); // tylko kod rozkazu na najstarszym miejscu
 				}
 			} else if (regs.length <= 2) {
 

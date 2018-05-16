@@ -26,11 +26,13 @@ function connectAll(currentMicrocodeRow) {
 		ctx.lineWidth = defaultStrokeWidth;
 
 		var $alu = $('#alu');
-
+		
+		var $barrelShifter = $('#barrelShifter');
 
 		var mcBlockConPadding = 50;
 
 		var aluOffset = $alu.offset();
+		var barrelShifterOffset = $barrelShifter.offset();
 		var canvasOffset = $(canvas).offset();
 		var canvasHeight = $(canvas).height();
 
@@ -47,6 +49,9 @@ function connectAll(currentMicrocodeRow) {
 
 		var aluX = aluOffset.left - canvasOffset.left;
 		var aluY = aluOffset.top - canvasOffset.top;
+		
+		var barrelShifterX = barrelShifterOffset.left - canvasOffset.left;
+		var barrelShifterY = barrelShifterOffset.top - canvasOffset.top;
 
 		var connectionPadding = 20;
 		var dotWidth = 6;
@@ -55,15 +60,15 @@ function connectAll(currentMicrocodeRow) {
 		// S2
 		ctx.beginPath();
 		ctx.lineWidth = (currentMicrocodeRow && currentMicrocodeRow.S2() ? boldStrokeWidth : defaultStrokeWidth);
-		ctx.moveTo(aluX - connectionPadding, 0);
-		ctx.lineTo(aluOffset.left - canvasOffset.left - connectionPadding, canvasHeight);
+		ctx.moveTo(barrelShifterX - connectionPadding, 0);
+		ctx.lineTo(barrelShifterX - connectionPadding, canvasHeight);
 
 		// łącznik dolnego wejścia ALU
-		ctx.fillRect(aluX - connectionPadding - dotWidth / 2,
+		ctx.fillRect(barrelShifterX - connectionPadding - dotWidth / 2,
 				aluY + (aluHeight / 4) * 3 - dotWidth / 2,
 				dotWidth, dotWidth);
 		// przyłącze ALU do szyny danych (górny)
-		ctx.moveTo(aluX - connectionPadding, aluY + (aluHeight / 4) * 3);
+		ctx.moveTo(barrelShifterX - connectionPadding, aluY + (aluHeight / 4) * 3);
 		ctx.lineTo(aluX + 5, aluY + (aluHeight / 4) * 3);
 		ctx.stroke();
 
@@ -97,11 +102,11 @@ function connectAll(currentMicrocodeRow) {
 		// przyłącze szyny danych do B (dot)
 		ctx.beginPath();
 		ctx.lineWidth = (currentMicrocodeRow && currentMicrocodeRow.S2() === "B" ? boldStrokeWidth : defaultStrokeWidth);
-		ctx.fillRect(aluX - connectionPadding - dotWidth / 2,
+		ctx.fillRect(barrelShifterX - connectionPadding - dotWidth / 2,
 				regB.top - canvasOffset.top - dotWidth / 2 + $regB.height() / 2,
 				dotWidth, dotWidth);
 		// przyłącze szyny danych do B
-		ctx.moveTo(aluX - connectionPadding, regB.top - canvasOffset.top + $regB.height() / 2);
+		ctx.moveTo(barrelShifterX - connectionPadding, regB.top - canvasOffset.top + $regB.height() / 2);
 		ctx.lineTo(aluX + 5, regB.top - canvasOffset.top + $regB.height() / 2);
 		ctx.stroke();
 
@@ -112,7 +117,7 @@ function connectAll(currentMicrocodeRow) {
 		ctx.beginPath();
 		ctx.lineWidth = (currentMicrocodeRow && currentMicrocodeRow.Regs() && (currentMicrocodeRow.Regs() === "RR" || currentMicrocodeRow.Regs().substring(0, 2) === "RA") ? boldStrokeWidth : defaultStrokeWidth);
 		// przyłącze rejestru A do bloku rejestrów głównych
-		ctx.moveTo(aluX + $regA.width() - 5, regA.top - canvasOffset.top + $regA.height() / 2);
+		ctx.moveTo(aluX + $regA.width() - 25, regA.top - canvasOffset.top + $regA.height() / 2);
 		ctx.lineTo($registers.offset().left - canvasOffset.left + 5, regA.top - canvasOffset.top + $regA.height() / 2);
 		ctx.stroke();
 
@@ -121,7 +126,7 @@ function connectAll(currentMicrocodeRow) {
 				(currentMicrocodeRow.Regs() === "RR" || currentMicrocodeRow.Regs().substring(0, 2) === "RB")
 				? boldStrokeWidth : defaultStrokeWidth);
 		// przyłącze rejestru B do bloku rejestrów głównych
-		ctx.moveTo(aluX + $regB.width() - 5, regB.top - canvasOffset.top + $regB.height() / 2);
+		ctx.moveTo(aluX + $regB.width() - 25, regB.top - canvasOffset.top + $regB.height() / 2);
 		ctx.lineTo($registers.offset().left - canvasOffset.left + 5, regB.top - canvasOffset.top + $regB.height() / 2);
 		ctx.stroke();
 
@@ -177,7 +182,7 @@ function connectAll(currentMicrocodeRow) {
 		// odrysowujemy połączenia do rejestrów tymczasowych
 
 		$('#architectureRegisters li').each(function (i, element) {
-			drawRegisterConnection(ctx, $(element), aluX - connectionPadding * 2, aluX - connectionPadding, aluOutDataBusX, dotWidth,
+			drawRegisterConnection(ctx, $(element), aluX - connectionPadding * 2, barrelShifterX - connectionPadding, aluOutDataBusX, dotWidth,
 					currentMicrocodeRow && currentMicrocodeRow.S1() && currentMicrocodeRow.S1() === $(element).find('.register-name').text(),
 					currentMicrocodeRow && currentMicrocodeRow.S2() && currentMicrocodeRow.S2() === $(element).find('.register-name').text(),
 					currentMicrocodeRow && currentMicrocodeRow.Dest() && currentMicrocodeRow.Dest() === $(element).find('.register-name').text());
@@ -191,14 +196,14 @@ function connectAll(currentMicrocodeRow) {
 		var $MARreg = $('#MAR-register');
 
 		$([$MARreg, $PCreg,$MDRreg]).each(function (i, element) {
-			drawRegisterConnection(ctx, $(element), aluX - connectionPadding * 2, aluX - connectionPadding, aluOutDataBusX, dotWidth,
+			drawRegisterConnection(ctx, $(element), aluX - connectionPadding * 2, barrelShifterX - connectionPadding, aluOutDataBusX, dotWidth,
 					currentMicrocodeRow && currentMicrocodeRow.S1() && currentMicrocodeRow.S1() === $(element).find('.register-name').text(),
 					currentMicrocodeRow && currentMicrocodeRow.S2() && currentMicrocodeRow.S2() === $(element).find('.register-name').text(),
 					currentMicrocodeRow && currentMicrocodeRow.Dest() && currentMicrocodeRow.Dest() === $(element).find('.register-name').text(),4,(i>1?3:2));
 		});
 
 	
-		drawRegisterConnectionSrcDataBusses(ctx, $IRreg, aluX - connectionPadding * 2, aluX - connectionPadding, dotWidth,
+		drawRegisterConnectionSrcDataBusses(ctx, $IRreg, aluX - connectionPadding * 2, barrelShifterX - connectionPadding, dotWidth,
 		    currentMicrocodeRow && currentMicrocodeRow.S1() && currentMicrocodeRow.S1() == $IRreg.find('.register-name').text(),
 			currentMicrocodeRow && currentMicrocodeRow.S2() && currentMicrocodeRow.S2() == $IRreg.find('.register-name').text());
 
@@ -239,9 +244,9 @@ function connectAll(currentMicrocodeRow) {
 		ctx.lineWidth = (currentMicrocodeRow && currentMicrocodeRow.S2() === "Const" ? boldStrokeWidth : defaultStrokeWidth);
 		ctx.moveTo(mcBlockOffset.left - canvasOffset.left + mcBlockW - 5,
 				mcBlockOffset.top - canvasOffset.top + 3 * mcBlockH / 4);
-		ctx.lineTo(aluX - connectionPadding,
+		ctx.lineTo(barrelShifterX - connectionPadding,
 				mcBlockOffset.top - canvasOffset.top + 3 * mcBlockH / 4);
-		ctx.fillRect(aluX - connectionPadding - dotWidth / 2,
+		ctx.fillRect(barrelShifterX - connectionPadding - dotWidth / 2,
 				mcBlockOffset.top - canvasOffset.top + 3 * mcBlockH / 4 - dotWidth / 2,
 				dotWidth, dotWidth);
 		ctx.stroke();

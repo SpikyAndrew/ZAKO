@@ -35,8 +35,8 @@ var microcodeOptions = {
 		S1S2: function (S1, S2) {
 			return ((S1 & 0x0000ffff) << 16) | (S2 & 0x0000ffff);
 		}
-
 	},
+	barrelShifterOpts: ['Apply', 'Ignore'],
 	s1opts: ['A', 'Const', 'PC', 'MAR', 'MDR', 'IR'],
 	s2opts: ['B', 'Const', 'PC', 'MAR', 'MDR', 'IR'],
 	destOpts: ['C', 'PC', 'MAR', 'MDR'],
@@ -169,13 +169,14 @@ var microcodeOptions = {
 };
 
 // MicrocodeRow exported properties
-var _microcodeRowProperties = ['label', 'ALU', 'S1', 'S2', 'Dest', 'ExtIR', 'Const', 'JCond', 'Adr', 'Mem', 'MAdr', 'MDest', 'Regs'];
+var _microcodeRowProperties = ['label', 'ALU', 'BShifter', 'S1', 'S2', 'Dest', 'ExtIR', 'Const', 'JCond', 'Adr', 'Mem', 'MAdr', 'MDest', 'Regs'];
 
 
 function MicrocodeRow() {
 	var self = this;
 	self.label = ko.observable();
 	self.ALU = ko.observable();
+	self.BShifter = ko.observable();
 	self.S1 = ko.observable();
 	self.S2 = ko.observable();
 	self.Dest = ko.observable();
