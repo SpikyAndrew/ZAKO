@@ -121,8 +121,14 @@ AsmInterpreter.prototype = {
 	},
 	// executed when JumpX was selected
 	interpretCurrentInstruction: function () {
-		var instructionCode = (0xff000000 & this.savedState.architectureRegisters.IR) >> 24;
+		var instructionWord = this.savedState.architectureRegisters.IR;
+		var conditionalCode = (((0xf0000000) & instructionWord) >> 28) & (0x0000000f);
+		var instructionCode = ((0x0ff00000) & instructionWord) >> 20;
 		console.log(instructionCode);
+		if (!this.isFulfilled(conditionalCode)){
+			this.uAddrReg.setValue(0);
+			return;
+		}
 		var jumpTableRow = this.jumpTable.getMcLabelForInstructionCode(instructionCode);
 		console.log(jumpTableRow.uCodeLabel());
 		console.log(jumpTableRow.mnemonic());
@@ -228,9 +234,11 @@ AsmInterpreter.prototype = {
 			if (microcodeRow.Dest() && microcodeRow.Dest().length > 0) {
 				var args = this.getAluArgsValues(microcodeRow);
 				console.log(args);
-				if(microcodeRow.BShifter==='Apply')
+				if(microcodeRow.BShifter()!='Ignore')
 				{
-			// TODO		args[1] = 
+					var shifterOperation = this.getShifterOperation(microcodeRow);
+					var shifterArg = this.getShifterArg(microcodeRow);
+					args[1] = shifterOperation.call(this, args[1], shifterArg);
 				}
 				var result = this.microcodeOptions.aluOperations[microcodeRow.ALU()].apply(this, args);
 				this.architectureRegisters.setRegisterValue(microcodeRow.Dest(), result);
@@ -240,6 +248,32 @@ AsmInterpreter.prototype = {
 		} else {
 			console.log('ALU is empty at uAR:' + this.savedState.architectureRegisters.uAR);
 		}
+	},
+	/**
+	 * 
+	 * @param {MicrocodeRow} microcodeRow
+	 * @returns {function}
+	 */
+	getShifterOperation: function (microcodeRow) {
+		if (microcodeRow.S2()==='IR'){
+			//LSL
+			return this.microcodeOptions.shifterOperations[decodeShifterCommand(1)];
+		}
+		var ir = this.savedState.architectureRegisters.IR;
+		var operationNumber = ((ir & 0x000000e0) >> 5);
+		return this.microcodeOptions.shifterOperations[decodeShifterCommand(operationNumber)];
+	},
+	/**
+	 * 
+	 * @param {MicrocodeRow} microcodeRow
+	 * @returns {integer}
+	 */
+	getShifterArg: function (microcodeRow) {
+		var ir = this.savedState.architectureRegisters.IR;
+		if (microcodeRow.S2()==='IR'){
+			return ((ir & 0x0000f00) >> 8) * 2; 
+		}
+		return ir & 0x0000001f;
 	},
 	/**
 	 * 
@@ -310,12 +344,15 @@ AsmInterpreter.prototype = {
 	encodeInstructionsToMemory: function () {
 		try {
 			for (var i = 0; i < this.instructionsToExec.length; i++) {
-				var instructionCode = this.encodeInstruction(this.instructionsToExec[i], i);
-				this.memoryMatrix.setValue(i, instructionCode);
+				if(this.instructionsToExec[i]!=""){
+					var instructionCode = this.encodeInstruction(this.instructionsToExec[i], i);
+					this.memoryMatrix.setValue(i, instructionCode);
+				}
+				
 			}
 		} catch (e) {
 			console.log(e);
-			alert('Błąd: ');
+			alert('Błąd: ' + e);
 		}
 	},
 	/**
@@ -325,12 +362,19 @@ AsmInterpreter.prototype = {
 	 * @returns {Number} encoded instruction into 32-bit dword
 	 */
 	encodeInstruction: function (instruction, instructionNumber) {
-		var spaceEl = instruction.indexOf(' ');// Znajdujemy pierwszą spację, po niej będą parametry
-		var mnemonic = instruction.slice(0, spaceEl);
+		var space = instruction.indexOf(' ');
+		var firstSymbol = instruction.slice(0, space);
+		var conditional = 'AL';
+		if (isConditional(firstSymbol)){
+			conditional = firstSymbol;
+			instruction = instruction.slice(space+1);
+			space = instruction.indexOf(' ');
+		}
+		var mnemonic = instruction.slice(0, space);
 		var mnemonicNumber = this.jumpTable.getNumberOf(mnemonic); // [0-255]
 		if (mnemonicNumber !== null) {
 //            console.log(mnemonic);
-			var args = instruction.slice(spaceEl + 1).split(',').map(function (el) {
+			var args = instruction.slice(space + 1).split(',').map(function (el) {
 				return el.trim();
 			});
 			// w args jest tablica typu: ['R1','152','R3']
@@ -339,16 +383,13 @@ AsmInterpreter.prototype = {
 			var regs = [];
 			var imms = [];
 			var shifts = [];
-			var conditionals = [];
+			
 			for (var i = 0; i < args.length; i++) {
-				if (this.isRegister(args[i])) {
+				if (isShifterArg(args[i])){
+					shifts.push(args[i]);
+				} else if (this.isRegister(args[i])) {
 					regs.push(this.registerList.getRegisterNumber(args[i]));
-				} else if (isShifterArg(args[i])){
-					shifts.push(args[i]);
-				} else if (isConditional(args[i])){
-					shifts.push(args[i]);
-				}
-				else {
+				} else {
 					var number = parseInt(args[i]);
 					if (!isNaN(number)) {
 						imms.push(number);
@@ -369,36 +410,114 @@ AsmInterpreter.prototype = {
 
 			if (regs.length === 0) {
 				if (imms.length === 1) 
-					{
-						if (shifts.length > 0){
-							throw new Error('Użyto przesunięcia bitowego w poleceniu ze zmienną bezpośrednią')
-						}
-						// cond4|Opcode8|Imm20|
-						return (encodeConditional(conditionals[0]) << 28 | mnemonicNumber << 20) | (imms[0] & 0x00ffffff); // 20 bitów na liczbę
-					} 
+				{
+					if (shifts.length > 0){
+						throw new Error('Użyto przesunięcia bitowego w poleceniu typu branch')
+					}
+					if (imms[0] !== undefined && imms[0] > 0x000fffff) {
+						throw new Error('Liczba ' + imms[0] + ' w instrukcji ' + instruction + ' jest zbyt duża. Musi mieścić się na 20 bitach');
+					}
+					// cond4|Opcode8|Imm20
+					return (encodeConditional(conditional) << 28 | mnemonicNumber << 20) | (imms[0] & 0x000fffff); // 20 bitów na liczbę
+				} 
 				else if (regs.length === 0 && imms.length === 0) {
-					return (encodeConditional(conditionals[0]) << 28 | mnemonicNumber << 20); // tylko kod rozkazu na najstarszym miejscu
+					// cond4|Opcode8|pustka20
+					return (encodeConditional(conditionals[0]) << 28 | mnemonicNumber << 20); 
 				}
-			} else if (regs.length <= 2) {
-
-				if (imms[0] !== undefined && imms[0] > 0x0000ffff) {
-					throw new Error('Liczba ' + imms[0] + ' w instrukcji ' + instruction + ' jest zbyt duża. Musi mieścić się na 16 bitach');
-				}
-
-				return (mnemonicNumber << 24)
-						| ((regs[0] << 20) | (regs[1] !== undefined ? regs[1] << 16 : 0)) // dwa rejestry
-						| (imms[0] !== undefined ? imms[0] & 0x0000ffff : 0); // immediete na 16 bitach
+			} 
+			else if (regs.length <= 2) {
+				// cond4|Opcode8|Ra4|Rb4|Shift4|Imm8
+				return (encodeConditional(conditional) << 28) | (mnemonicNumber << 20)
+						| ((regs[0] << 16) | (regs[1] !== undefined ? regs[1] << 12 : 0)) // dwa rejestry
+						| encodeImmediate(imms[0]); // immediate na 12 bitach
 			} else { // liczba rejestrów >2
-				var ret = (mnemonicNumber << 24);
-				for (var i = 0; i < regs.length; i++) {
-					ret |= regs[i] << 20 - i * 4;
-				}
-				return ret;
+				// cond4|Opcode8|Ra4|Rb4|Rc4|ShiftCommand3|Shift5
+				var shift = (shifts[0] !== undefined ? encodeShifterArg(shifts[0]) : 0);
+				return (encodeConditional(conditional) << 28) | (mnemonicNumber << 20)
+						| (regs[0] << 16) | (regs[1] << 12) | (regs[2] << 8)
+						| shift;
 			}
 		} else {
 			throw new Error('Niezadeklarowany mnemonik rozkazu: ' + mnemonic + ' w linii: ' + instruction);
 		}
 	},
+	
+	isSet: function (flagName) {
+		var cpsr = this.savedState.architectureRegisters.CPSR;
+		var bitIndex = cpsrFlags.indexOf(flagName);
+		var flag = ((cpsr >> bitIndex) & 0x00000001)
+		return (flag!=0);
+	},
+	/**
+	 * 
+	 * @param {String} flagName 
+	 * @param {Boolean} state stan w który ma być ustawiona flaga
+	 */
+	setFlag: function (flagName, state) {
+		var cpsr = this.architectureRegisters.getRegister('CPSR'); ;
+		var bitIndex = cpsrFlags.indexOf(flagName);
+		var cpsrValue = cpsr.getValue();
+		if (state){
+			cpsr.setValue(cpsrValue | (1 << bitIndex));
+		}
+		else {
+			cpsr.setValue(cpsrValue ^ (1 << bitIndex));
+		}
+	},
+
+	isFulfilled: function (condition) {
+		switch (conditionalCodes[condition]){
+			case 'AL':
+				return true;
+				break;
+			case 'EQ':
+				return this.isSet('Z');
+				break;
+			case 'NE':
+				return !this.isSet('Z');
+				break;
+			case 'CS':
+				return this.isSet('C');
+				break;
+			case 'CC':
+				return !this.isSet('C');
+				break;
+			case 'MI':
+				return this.isSet('N');
+				break;
+			case 'PL':
+				return !this.isSet('N');
+				break;
+			case 'VS':
+				return this.isSet('V');
+				break;
+			case 'VC':
+				return !this.isSet('V');
+				break;
+			case 'HI':
+				return this.isSet('C') && !this.isSet('Z');
+				break;
+			case 'LS':
+				return !this.isSet('C') || this.isSet('Z');
+				break;
+			case 'GE':
+				return this.isSet('N') === this.isSet('V');
+				break;
+			case 'LT':
+				return this.isSet('N') != this.isSet('V');
+				break;
+			case 'GT':
+				return !this.isSet('Z') && (this.isSet('N') === this.isSet('V'));
+				break;
+			case 'LE':
+				return this.isSet('Z') || (this.isSet('N') != this.isSet('V'));
+				break;
+			case 'NV':
+				return false;
+				break;
+		}
+	},
+	
 	reset: function () {
 		this.resetRegisters();
 

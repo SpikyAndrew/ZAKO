@@ -36,6 +36,27 @@ var microcodeOptions = {
 			return ((S1 & 0x0000ffff) << 16) | (S2 & 0x0000ffff);
 		}
 	},
+	shifterOperations: {
+		NOP: function (S2, shift) {
+			return S2;
+		},
+		LSL: function (S2, shift) {
+			return (S2<<shift);
+		},
+		LSR: function (S2, shift) {
+			return (S2<<shift);
+		},
+		ASR: function (S2, shift) {
+		return ((S2 & 0x7fffffff) >> shift) | (S2 & 0x80000000);
+		}
+		//ROR: function (S2, shift) {
+		//	TODO
+		//}
+		//RRX: function (S2, shift) {
+		//	TODO
+		//}
+		
+	},
 	barrelShifterOpts: ['Apply', 'Ignore'],
 	s1opts: ['A', 'Const', 'PC', 'MAR', 'MDR', 'IR'],
 	s2opts: ['B', 'Const', 'PC', 'MAR', 'MDR', 'IR'],
@@ -140,15 +161,15 @@ var microcodeOptions = {
 			var regA = this.architectureRegisters.getRegister('A');
 			var regB = this.architectureRegisters.getRegister('B');
 			var IrValue = this.savedState.architectureRegisters.IR;
-			var r1Nr = (IrValue & 0x00f00000) >> 20;
-			var r2Nr = (IrValue & 0x000f0000) >> 16;
+			var r1Nr = (IrValue & 0x000f0000) >> 16;
+			var r2Nr = (IrValue & 0x0000f000) >> 12;
 			regA.setValue(this.savedState.registerList[r1Nr]);
 			regB.setValue(this.savedState.registerList[r2Nr]);
 		},
 		WF1: function () {
 			var regCvalue = this.savedState.architectureRegisters.C;
 			var IrValue = this.savedState.architectureRegisters.IR;
-			var regNr = (IrValue & 0x00f00000) >> 20;
+			var regNr = (IrValue & 0x000f0000) >> 16;
 			console.log(this.savedState);
 			console.log("Zapisuję wartość rejestru nr " + regNr + " na " + regCvalue);
 			this.registerList.registers()[regNr](regCvalue);
@@ -156,14 +177,22 @@ var microcodeOptions = {
 		WF2: function () {
 			var regCvalue = this.savedState.architectureRegisters.C;
 			var IrValue = this.savedState.architectureRegisters.IR;
-			var regNr = (IrValue & 0x000f0000) >> 16;
+			var regNr = (IrValue & 0x0000f000) >> 12;
 			this.registerList.registers()[regNr](regCvalue);
 		},
 		WF3: function () {
 			var regCvalue = this.savedState.architectureRegisters.C;
 			var IrValue = this.savedState.architectureRegisters.IR;
-			var regNr = (IrValue & 0x0000f000) >> 12;
+			var regNr = (IrValue & 0x00000f00) >> 8;
 			this.registerList.registers()[regNr](regCvalue);
+		},
+		CPSR: function() {
+			var regC = this.architectureRegisters.getRegister('C');
+			this.setFlag('N', regC.getValue()<0);
+			this.setFlag('Z', regC.getValue()===0);
+			//todo??? implementacja carry flag i overflow flag
+			this.setFlag('C',false);
+			this.setFlag('V',false);
 		}
 	}
 };
