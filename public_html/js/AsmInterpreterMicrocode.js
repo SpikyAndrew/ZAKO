@@ -461,7 +461,7 @@ AsmInterpreter.prototype = {
 			cpsr.setValue(cpsrValue | (1 << bitIndex));
 		}
 		else {
-			cpsr.setValue(cpsrValue ^ (1 << bitIndex));
+			cpsr.setValue(cpsrValue & ~(1 << bitIndex));
 		}
 	},
 

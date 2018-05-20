@@ -275,7 +275,11 @@ mov R1,20;</textarea>
                                 <li><a data-toggle="pill" href="#tab-log">Info log</a></li>
                             </ul>
                             <div class="action-buttons">
+								<b>Breakpoint:</b>
+								<input type="number" value="100" id="breakpointInput" data-bind="value: breakpoint"/>
+								<b>Wykonano cykli:</b>
 								<span id="all-cycles" data-bind="text: allCycles"> </span>
+								<b>Liczba cykli do wykonia:</b>
 								<input type="number" value="0" id="multiple-cycles" data-bind="value: multipleCycles"/>
                                 <button class='circle-button-small' id='resetButton'><i class="fa fa-refresh"></i></button>
                                 <button class='circle-button-small' id='nextInstrButton'><i class="fa fa-step-forward"></i></button>
@@ -341,7 +345,6 @@ mov R1,20;</textarea>
         <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/ProcsimVM.js"></script>
         <script type="text/javascript">
-
 									defaultMicrocodeSize = 20;
 
 									$(function () {
@@ -379,16 +382,21 @@ mov R1,20;</textarea>
 								viewModel.allCycles(0);
                             });
                             $('#nextInstrButton').click(function () {
-								for (var i = 0; i < viewModel.multipleCycles(); i++) {
+							var i;
+								for (i = 0; i < viewModel.multipleCycles(); i++) {
 									try {
 										viewModel.interpreter.interpretCurrentMicroinstruction();
+										var bp = viewModel.breakpoint();
+										if(viewModel.interpreter.architectureRegisters.getRegister('PC').getValue()/4 == viewModel.breakpoint()){
+											break;
+										}
 									} catch (e) {
 										var $el = $('<li></li>');
 										$el.text(e.message);
 										$('#log-content').append($el);
 									}
 								}
-								viewModel.allCycles(parseInt(viewModel.allCycles())+parseInt(viewModel.multipleCycles()));
+								viewModel.allCycles(parseInt(viewModel.allCycles())+i);
 								connectAll(viewModel.interpreter.currentMcRow());
 							});
 

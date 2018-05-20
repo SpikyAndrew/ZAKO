@@ -19,6 +19,7 @@ function ProcsimVM(updateAsmExecLineCb, updateUAdrLine, $textarea) {
 	self.jumpTable = new JumpTable();
 
 	self.multipleCycles = ko.observable(1);
+	self.breakpoint = ko.observable(100);
 	self.allCycles = ko.observable(0);
 
 	if (localStorage.jumpTable !== undefined) {
